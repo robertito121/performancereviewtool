@@ -3,24 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package parrot;
+package View;
 
 /**
  *
  * @author Group 2
  */
-
-import Controller.*;
-
-public class Parrot {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
+public class LoginScreen {
+    
+    private LoginFrame lf;
+    
+    public LoginScreen() {
         
-        LoginController login = new LoginController();
-       
+        lf = new LoginFrame();
     }
     
+    public LoginFrame getLoginFrame() {
+        
+        return lf;
+    }
 }
