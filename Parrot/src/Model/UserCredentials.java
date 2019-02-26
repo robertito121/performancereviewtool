@@ -11,4 +11,22 @@ package Model;
  */
 public class UserCredentials {
     
+    private String userName;
+    private String password;
+    
+    public UserCredentials(String inf_userName, String inf_password) {
+        
+        userName = inf_userName;
+        password = inf_password;
+    }
+    
+    public String getUserName() {
+        
+        return userName;
+    }
+    
+    public String getPassword() {
+        
+        return password;
+    }
 }
