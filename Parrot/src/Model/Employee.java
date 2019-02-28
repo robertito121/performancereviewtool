@@ -11,4 +11,9 @@ package Model;
  */
 public class Employee extends User {
     
+    public Employee(String username, int userID, UserCredentials userCredentials, String department) {
+        
+        super(username, userID, userCredentials, department);
+    }
+    
 }

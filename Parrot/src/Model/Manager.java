@@ -11,4 +11,8 @@ package Model;
  */
 public class Manager extends User {
     
+    public Manager(String username, int userID, UserCredentials userCredentials, String department) {
+        
+        super(username, userID, userCredentials, department);
+    }
 }
