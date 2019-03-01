@@ -10,5 +10,13 @@ package View;
  * @author Group 2
  */
 public class HomeFrame {
+   
     
+   
+  
+    
+    public HomeFrame()
+    {
+    
+    }
 }

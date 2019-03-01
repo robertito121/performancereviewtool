@@ -101,6 +101,9 @@ public class LoginController implements ActionListener {
             else {
                 
                 loginErrorLabel.setText(Integer.toString(activeUserID));
+                HomeController hcontroller = new HomeController();
+                    
+                    
             }
         }
     }
