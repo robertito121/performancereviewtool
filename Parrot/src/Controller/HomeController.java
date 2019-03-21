@@ -6,6 +6,7 @@
 package Controller;
 
 import View.HomeScreen;
+import View.LogoutConfirmUI;
 import java.awt.event.ActionEvent;
 import javax.swing.JFrame;
 
