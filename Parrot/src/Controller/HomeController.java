@@ -16,6 +16,7 @@ import javax.swing.JFrame;
 public class HomeController {
     private HomeScreen screen;
     private JFrame frame;
+    private LogoutConfirmUI confirmLogout;
     
     public HomeController(){
          screen = new HomeScreen();
@@ -38,9 +39,22 @@ public class HomeController {
      */
     private void logoutPressed()
     {
+        confirmLogout = new LogoutConfirmUI();
+        confirmLogout.setVisible(true);
+        
+        confirmLogout.getYes().addActionListener(event -> confirmedLogout());
+        confirmLogout.getNo().addActionListener(event -> unconfirmedLogout());
+    }
+    
+    private void confirmedLogout(){
         LoginController loginController = new LoginController();
         screen.setVisible(false);
         frame.dispose();
+        confirmLogout.dispose();
+    }
+    
+    private void unconfirmedLogout(){
+        confirmLogout.dispose();
     }
     
 }
