@@ -1,54 +1,43 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model;
-
-/**
- *
- * @author Group 2
- */
 
 import java.util.ArrayList;
 
 public class UserList {
-    
-    private ArrayList userList;
-    
+
+    private ArrayList<User> userList;
+
     public UserList() {
-    
         userList = new ArrayList();
-        
     }
-    
-    //This class initilizes the userlist with some default data
+
     public void initializeList() {
-        
-        UserCredentials newCredentials = new UserCredentials("rgonzales", "password1");
-        Administrator newUser = new Administrator("Roberto Gonzales", 1, newCredentials, "Admin");
+
+        UserCredentials credentials = new UserCredentials("rgonzales1", "password1");
+        User newUser = new User("Roberto",  "Gonzales", "rgonzales1", "administrator", credentials);
         userList.add(newUser);
-        
-        newCredentials = new UserCredentials("jgill", "password2");
-        newUser = new Administrator("Joey Gill", 2, newCredentials, "Admin");
+
+        credentials = new UserCredentials("jgill", "password2");
+        newUser = new User("Joey",  "Gill", "jgill", "administrator", credentials);
         userList.add(newUser);
-        
-        newCredentials = new UserCredentials("shandelong", "password3");
-        newUser = new Administrator("Stephen Handelong", 3, newCredentials, "Admin");
+
+        credentials = new UserCredentials("shandelong", "password3");
+        newUser = new User("Stephen",  "Handelong", "shandelong", "administrator", credentials);
         userList.add(newUser);
-        
-       newCredentials = new UserCredentials("tgordon", "password4");
-        newUser = new Administrator("Tommee Gordon", 4, newCredentials, "Admin");
+
+        credentials = new UserCredentials("tgordon", "password4");
+        newUser = new User("Tommee",  "Gordon", "tgordon", "administrator", credentials);
         userList.add(newUser);
-        
-        newCredentials = new UserCredentials("sgill", "password5");
-        newUser = new Administrator("Shane Gill", 5, newCredentials, "Admin");
+
+        credentials = new UserCredentials("sgill", "password5");
+        newUser = new User("Shane",  "Gill", "sgill", "administrator", credentials);
         userList.add(newUser);
-    
     }
-    
-    public ArrayList getUserList() {
-        
+
+    public ArrayList<User> getUserList() {
         return userList;
+    }
+
+    public void setUserList(ArrayList<User> userList) {
+        this.userList = userList;
     }
 }

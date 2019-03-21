@@ -1,36 +1,97 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Model;
 
-/**
- *
- * @author Group 2
- */
 public class User {
-    
-    private String userName;
-    private int userID;
+
+    protected String firstName;
+    protected String lastName;
+    protected String userId;
+    protected String role;
     private UserCredentials userCredentials;
-    private String department; //THIS IS EVENTUALLY GOING TO NEED TO BE CHANGED TO A DEPARTMENT OBJECT INSTEAD OF A STRING
-    
-    public User(String inf_userName, int inf_userID, UserCredentials inf_userCredentials, String inf_department) {
-        
-        userName = inf_userName;
-        userID = inf_userID;
-        userCredentials = inf_userCredentials;
-        department = inf_department;
+
+    public User(String firstName, String lastName, String userId, String role, UserCredentials credentials){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userId = userId;
+        this.role = role;
+        this.userCredentials = credentials;
     }
-    
+
+    /**
+     * @return the firstName
+     */
+    public String getFirstName() {
+        return firstName;
+    }
+
+    /**
+     * @param firstName the firstName to set
+     */
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    /**
+     * @return the lastName
+     */
+    public String getLastName() {
+        return lastName;
+    }
+
+    /**
+     * @param lastName the lastName to set
+     */
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    /**
+     * @return the userId
+     */
+    public String getUserId() {
+        return userId;
+    }
+
+    /**
+     * @param userId the userId to set
+     */
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    /**
+     * @return the role
+     */
+    public String getRole() {
+        return role;
+    }
+
+    /**
+     * @param role the role to set
+     */
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public void setPermissions(String userRole){
+
+    }
+
+    /**
+     * displays the users info in the overwritten format
+     * @return
+     */
+    @Override
+    public String toString() {
+        String userToString = "" + firstName + " " + lastName + " (" + userId + ")";
+        return userToString;
+    }
+
+
     public UserCredentials getUserCredentials() {
-        
         return userCredentials;
     }
-    
-    public int getUserID() {
-        
-        return userID;
+
+    public void setUserCredentials(UserCredentials userCredentials) {
+        this.userCredentials = userCredentials;
     }
 }
