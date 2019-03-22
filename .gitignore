@@ -1,2 +1,6 @@
-/Parrot/nbproject/private/
+/Parrot/nbproject/
 /Parrot/build/
+/Parrot/dist/
+/Parrot/out/
+/Parrot/build.xml
+/Parrot/.idea/
