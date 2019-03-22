@@ -48,11 +48,13 @@ public class LoginController {
 
 
         }
-
-
-
-
-
+     
+    }
+    
+    @FXML
+    public void exit() {
+        
+        System.exit(0);
     }
 
     public boolean checkAuthentication() {
