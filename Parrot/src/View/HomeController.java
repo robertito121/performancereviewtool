@@ -37,9 +37,6 @@ public class HomeController implements Initializable {
     @FXML
     private Label userProfileRole;
 
-    private User authenticatedUser;
-
-
 
     public HomeController() {
 
@@ -50,11 +47,27 @@ public class HomeController implements Initializable {
 
     }
 
+    /**
+     * Populates the "My Profile" section with authenticated user information
+     * @param firstName
+     * @param lastName
+     * @param userID
+     * @param role
+     */
     public void populateMyProfilePane(String firstName, String lastName, String userID, String role) {
         myProfileFirstName.setText(firstName);
         myProfileLastName.setText(lastName);
         myProfileUserID.setText(userID);
         myProfileRole.setText(role);
+    }
+
+    /**
+     * exits the application by hitting the cancel button
+     */
+    @FXML
+    public void exit() {
+
+        System.exit(0);
     }
 
     public AnchorPane getHomeScreen() {

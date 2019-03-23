@@ -145,6 +145,77 @@ public class LoginController implements Initializable {
 
     }
 
+    public AnchorPane getLoginPane() {
+        return loginPane;
+    }
+
+    public void setLoginPane(AnchorPane loginPane) {
+        this.loginPane = loginPane;
+    }
+
+    public Label getUsernameLabel() {
+        return usernameLabel;
+    }
+
+    public void setUsernameLabel(Label usernameLabel) {
+        this.usernameLabel = usernameLabel;
+    }
+
+    public Label getPasswordLabel() {
+        return passwordLabel;
+    }
+
+    public void setPasswordLabel(Label passwordLabel) {
+        this.passwordLabel = passwordLabel;
+    }
+
+    public TextField getUsernameTextField() {
+        return usernameTextField;
+    }
+
+    public void setUsernameTextField(TextField usernameTextField) {
+        this.usernameTextField = usernameTextField;
+    }
+
+    public TextField getPasswordTextField() {
+        return passwordTextField;
+    }
+
+    public void setPasswordTextField(TextField passwordTextField) {
+        this.passwordTextField = passwordTextField;
+    }
+
+    public Button getLoginButton() {
+        return loginButton;
+    }
+
+    public void setLoginButton(Button loginButton) {
+        this.loginButton = loginButton;
+    }
+
+    public Button getCancelButton() {
+        return cancelButton;
+    }
+
+    public void setCancelButton(Button cancelButton) {
+        this.cancelButton = cancelButton;
+    }
+
+    public Label getInformationLabel() {
+        return informationLabel;
+    }
+
+    public void setInformationLabel(Label informationLabel) {
+        this.informationLabel = informationLabel;
+    }
+
+    public UserList getUserList() {
+        return userList;
+    }
+
+    public void setUserList(UserList userList) {
+        this.userList = userList;
+    }
 }
 
 

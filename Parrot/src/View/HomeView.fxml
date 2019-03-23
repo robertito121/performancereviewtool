@@ -8,13 +8,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="homeScreen" prefHeight="830.0" prefWidth="1132.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.HomeController">
+<AnchorPane fx:id="homeScreen" prefHeight="830.0" prefWidth="1271.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.HomeController">
    <children>
-      <MenuBar prefHeight="32.0" prefWidth="1132.0">
+      <MenuBar prefHeight="32.0" prefWidth="1271.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem mnemonicParsing="false" onAction="#exit" text="Close" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Users">
@@ -25,7 +25,7 @@
           <Menu mnemonicParsing="false" text="Reports" />
         </menus>
       </MenuBar>
-      <Pane layoutY="32.0" prefHeight="339.0" prefWidth="268.0" style="-fx-border-color: black;">
+      <Pane layoutY="32.0" prefHeight="286.0" prefWidth="268.0" style="-fx-border-color: black;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="32.0">
          <children>
             <Label layoutX="42.0" layoutY="14.0" prefHeight="39.0" prefWidth="166.0" text="My Profile">
                <font>
@@ -58,7 +58,7 @@
             <Label fx:id="myProfileRole" layoutX="102.0" layoutY="229.0" prefHeight="21.0" prefWidth="130.0" />
          </children>
       </Pane>
-      <Pane layoutY="380.0" prefHeight="450.0" prefWidth="268.0" style="-fx-border-color: black;">
+      <Pane layoutY="380.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="513.0" prefWidth="268.0" style="-fx-border-color: black;" AnchorPane.bottomAnchor="0.0">
          <children>
             <Label layoutX="34.0" layoutY="20.0" prefHeight="39.0" prefWidth="200.0" text="USer Profile">
                <font>
@@ -91,5 +91,27 @@
             <Label fx:id="userProfileRole" layoutX="105.0" layoutY="293.0" prefHeight="21.0" prefWidth="130.0" />
          </children>
       </Pane>
+      <Pane layoutX="912.0" layoutY="32.0" prefHeight="369.0" prefWidth="385.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <TableView prefHeight="314.0" prefWidth="385.0">
+               <columns>
+                  <TableColumn prefWidth="75.0" text="C1" />
+                  <TableColumn prefWidth="75.0" text="C2" />
+               </columns>
+            </TableView>
+         </children>
+      </Pane>
+      <TableView layoutX="300.0" layoutY="197.0" prefHeight="598.0" prefWidth="561.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="410.0" AnchorPane.topAnchor="197.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn prefWidth="75.0" text="C2" />
+        </columns>
+      </TableView>
+      <Label layoutX="455.0" layoutY="100.0" prefHeight="49.0" prefWidth="323.0" text="My Reports" AnchorPane.leftAnchor="455.0" AnchorPane.rightAnchor="493.0">
+         <font>
+            <Font name="Stencil" size="40.0" />
+         </font>
+      </Label>
+      <ScrollPane layoutX="886.0" layoutY="402.0" prefHeight="421.0" prefWidth="385.0" AnchorPane.bottomAnchor="7.0" AnchorPane.rightAnchor="0.0" />
    </children>
 </AnchorPane>
