@@ -5,9 +5,9 @@ import Model.UserList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -16,9 +16,11 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 
-public class LoginController {
+public class LoginController implements Initializable {
 
     @FXML
     private AnchorPane loginPane;
@@ -40,29 +42,47 @@ public class LoginController {
     private UserList userList;
 
     public LoginController() {
+
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         userList = new UserList();
         userList.initializeList(); //This initializes the userList with some default data
 
     }
 
+    /**
+     * Authenticates the user and populates the user data under the "My Profile" section
+     * @param event
+     * @throws IOException
+     */
     @FXML
-    public void authenticate(ActionEvent event ) throws IOException {
+    public void authenticate(ActionEvent event) throws IOException {
 
         boolean isAuthenticated = checkAuthentication();
         if (isAuthenticated == true) {
 
             //set homeView
-            Parent homeView = FXMLLoader.load(getClass().getResource("HomeView.fxml"));
+            FXMLLoader homeViewLoader = new FXMLLoader(getClass().getResource("HomeView.fxml"));
+            Parent homeView = (Parent) homeViewLoader.load();
             Stage homeViewStage = new Stage();
             homeViewStage.setTitle("Performance Review Tool (Parrot) ");
             homeViewStage.setScene(new Scene(homeView));
             homeViewStage.show();
 
+            //populate My Profile View with authenticated user info
+            User authenticatedUser = getAuthenticatedUser();
+            String firstName = authenticatedUser.getFirstName();
+            String lastName = authenticatedUser.getLastName();
+            String userID = authenticatedUser.getUserId();
+            String role =  authenticatedUser.getRole();
+            HomeController homeController = homeViewLoader.getController();
+            homeController.populateMyProfilePane(firstName, lastName, userID, role);
+
             //dispose login View
             Stage loginStage = (Stage) loginButton.getScene().getWindow();
             loginStage.close();
-
-
         }
         else {
             informationLabel.setTextFill(Color.RED);
@@ -70,13 +90,20 @@ public class LoginController {
         }
      
     }
-    
+
+    /**
+     * exits the application by hitting the cancel button
+     */
     @FXML
     public void exit() {
         
         System.exit(0);
     }
 
+    /**
+     * helper method to check for authentication of a user
+     * @return boolean
+     */
     public boolean checkAuthentication() {
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
@@ -97,6 +124,26 @@ public class LoginController {
         return false;
     }
 
+    /**
+     * Helper method to get authenticated user
+     * @return
+     */
+    public User getAuthenticatedUser() {
+        String username = usernameTextField.getText();
+        User user = null;
+
+        for (int i = 0; i < userList.getUserList().size(); i++) {
+            if (username.equals(userList.getUserList().get(i).getUserCredentials().getUserName())) {
+                user = userList.getUserList().get(i);
+                break;
+            }
+            else {
+                user = null;
+            }
+        }
+        return user;
+
+    }
 
 }
 
