@@ -2,9 +2,15 @@ package View;
 
 import Model.User;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -68,6 +74,18 @@ public class HomeController implements Initializable {
     public void exit() {
 
         System.exit(0);
+    }
+
+    @FXML
+    public void showManageUsersView() throws IOException {
+
+        // set ManageUsersView
+        FXMLLoader manageUsersViewLoader = new FXMLLoader(getClass().getResource("ManageUsersView.fxml"));
+        Parent manageUsersView = (Parent) manageUsersViewLoader.load();
+        Stage manageUsersViewStage = new Stage();
+        manageUsersViewStage.setTitle("Manage Users");
+        manageUsersViewStage.setScene(new Scene(manageUsersView));
+        manageUsersViewStage.show();
     }
 
     public AnchorPane getHomeScreen() {
