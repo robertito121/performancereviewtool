@@ -59,6 +59,8 @@ public class HomeController implements Initializable {
     
     @FXML 
     private TableColumn<User, String> UserName;
+    
+    private UserList userList;
 
 
     public HomeController() {
@@ -67,7 +69,13 @@ public class HomeController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //fillTable();
+        userList = new UserList();
+        userList.initializeList();
+        
+        UserId.setCellValueFactory(new PropertyValueFactory<>("userId"));
+        UserName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        
+        fillTable();
     }
 
     /**
@@ -191,22 +199,17 @@ public class HomeController implements Initializable {
     
     
     public void fillTable() {
-        UserList userList = new UserList();
-        userList.initializeList();
-
-        tableView.getItems().setAll(userList.getUserList());
-         User testUser;
-         String userID;
-         String name;
-         
-
-        for (int i = 0; i < userList.getUserList().size(); i++) {
-            testUser = userList.getUserList().get(i);
-            userID = testUser.getUserId();
-            name = testUser.getFirstName() + " " + testUser.getLastName();
-            UserId.setCellValueFactory(new PropertyValueFactory<User, String>(userID));
-            UserName.setCellValueFactory(new PropertyValueFactory<User, String>(name));
+        tableView.setItems(getUsers());
+    }
+    
+    //Creates list to populate table
+    private ObservableList<User> getUsers(){
+        ObservableList<User> users = FXCollections.observableArrayList();
+        
+        for(int i = 0; i < userList.getUserList().size(); i++){
+        users.add(userList.getUserList().get(i));
         }
+        return users;
     }
 
 }
