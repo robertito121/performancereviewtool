@@ -16,11 +16,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author Group 2
- */
 public class ManageUsersController implements Initializable {
 
     /**
@@ -28,9 +23,12 @@ public class ManageUsersController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
     }
 
+    /**
+     * displays the AddUserView
+     * @throws IOException
+     */
     @FXML
     public void displayAddUserView() throws IOException {
 
@@ -38,9 +36,8 @@ public class ManageUsersController implements Initializable {
         FXMLLoader addUserViewLoader = new FXMLLoader(getClass().getResource("AddUserView.fxml"));
         Parent addUserView = (Parent) addUserViewLoader.load();
         Stage addUserViewStage = new Stage();
-        addUserViewStage.setTitle("Manage Users");
+        addUserViewStage.setTitle("Add User");
         addUserViewStage.setScene(new Scene(addUserView));
         addUserViewStage.show();
     }
-    
 }

@@ -112,7 +112,7 @@ public class HomeController implements Initializable {
         FXMLLoader addUserViewLoader = new FXMLLoader(getClass().getResource("AddUserView.fxml"));
         Parent addUserView = (Parent) addUserViewLoader.load();
         Stage addUserViewStage = new Stage();
-        addUserViewStage.setTitle("Manage Users");
+        addUserViewStage.setTitle("Add User");
         addUserViewStage.setScene(new Scene(addUserView));
         addUserViewStage.show();
     }
