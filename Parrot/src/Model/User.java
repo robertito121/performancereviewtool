@@ -6,13 +6,15 @@ public class User {
     protected String lastName;
     protected String userId;
     protected String role;
+    protected String department;
     private UserCredentials userCredentials;
 
-    public User(String firstName, String lastName, String userId, String role, UserCredentials credentials){
+    public User(String firstName, String lastName, String userId, String role, String department,  UserCredentials credentials){
         this.firstName = firstName;
         this.lastName = lastName;
         this.userId = userId;
         this.role = role;
+        this.department = department;
         this.userCredentials = credentials;
     }
 

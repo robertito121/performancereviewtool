@@ -10,7 +10,7 @@
    <children>
       <Pane layoutX="177.0" layoutY="462.0" prefHeight="163.0" prefWidth="492.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="177.0" AnchorPane.rightAnchor="194.0">
          <children>
-            <Button fx:id="addUserButton" layoutX="14.0" layoutY="30.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="133.0" text="Add New User" />
+            <Button fx:id="addUserButton" layoutX="14.0" layoutY="30.0" mnemonicParsing="false" onAction="#displayAddUserView" prefHeight="41.0" prefWidth="133.0" text="Add New User" />
             <Button fx:id="backButton" layoutX="177.0" layoutY="108.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="122.0" text="Cancel" />
             <Button fx:id="modifyUserButton" layoutX="177.0" layoutY="30.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="122.0" text="Modify User" />
             <Button fx:id="deleteUserButton" layoutX="321.0" layoutY="30.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="133.0" text="Delete User" />

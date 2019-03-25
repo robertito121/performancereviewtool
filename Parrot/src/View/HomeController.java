@@ -67,7 +67,7 @@ public class HomeController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        fillTable();
+        //fillTable();
     }
 
     /**
@@ -193,8 +193,7 @@ public class HomeController implements Initializable {
     public void fillTable() {
         UserList userList = new UserList();
         userList.initializeList();
-                     
-        
+
         tableView.getItems().setAll(userList.getUserList());
          User testUser;
          String userID;
