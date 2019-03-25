@@ -43,6 +43,14 @@ public class HomeController implements Initializable {
     @FXML
     private Label userProfileRole;
 
+    @FXML 
+    private TableView<User> tableView;
+    
+    @FXML 
+    private TableColumn<User, String> UserId;
+    
+    @FXML 
+    private TableColumn<User, String> UserName;
 
     public HomeController() {
 
