@@ -87,6 +87,18 @@ public class HomeController implements Initializable {
         manageUsersViewStage.setScene(new Scene(manageUsersView));
         manageUsersViewStage.show();
     }
+    
+    @FXML
+    public void openAddUserView() throws IOException {
+        
+        // set addUserView
+        FXMLLoader addUserViewLoader = new FXMLLoader(getClass().getResource("AddUserView.fxml"));
+        Parent addUserView = (Parent) addUserViewLoader.load();
+        Stage addUserViewStage = new Stage();
+        addUserViewStage.setTitle("Manage Users");
+        addUserViewStage.setScene(new Scene(addUserView));
+        addUserViewStage.show();
+    }
 
     public AnchorPane getHomeScreen() {
         return homeScreen;
@@ -158,6 +170,26 @@ public class HomeController implements Initializable {
 
     public void setUserProfileRole(Label userProfileRole) {
         this.userProfileRole = userProfileRole;
+    }
+    
+        public void fillTable() {
+        UserList userList = new UserList();
+        userList.initializeList();
+                     
+        
+        tableView.getItems().setAll(userList.getUserList());
+         User testUser;
+         String userID;
+         String name;
+         
+
+        for (int i = 0; i < userList.getUserList().size(); i++) {
+            testUser = userList.getUserList().get(i);
+            userID = testUser.getUserId();
+            name = testUser.getFirstName() + " " + testUser.getLastName();
+            UserId.setCellValueFactory(new PropertyValueFactory<User, String>(userID));
+            UserName.setCellValueFactory(new PropertyValueFactory<User, String>(name));
+        }
     }
 
 }
