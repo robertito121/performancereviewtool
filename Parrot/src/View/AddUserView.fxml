@@ -9,21 +9,23 @@
 
 <AnchorPane id="AnchorPane" prefHeight="280.0" prefWidth="365.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="View.AddUserController">
    <children>
-      <Label layoutX="22.0" layoutY="146.0" text="Department:" />
-      <TextField fx:id="departmentText" layoutX="96.0" layoutY="142.0" />
-      <TextField fx:id="userIDText" layoutX="96.0" layoutY="111.0" />
-      <PasswordField fx:id="passwordText" layoutX="96.0" layoutY="80.0" />
-      <TextField fx:id="usernameText" layoutX="96.0" layoutY="49.0" />
-      <TextField fx:id="nameText" layoutX="96.0" layoutY="18.0" />
-      <Label layoutX="22.0" layoutY="115.0" text="User ID:" />
-      <Label layoutX="22.0" layoutY="84.0" text="Password:" />
-      <Label layoutX="22.0" layoutY="53.0" text="Username:" />
-      <Label layoutX="22.0" layoutY="22.0" text="Name:" />
-      <RadioButton fx:id="employeeRadio" layoutX="96.0" layoutY="183.0" mnemonicParsing="false" text="Employee" />
-      <RadioButton fx:id="managerRadio" layoutX="176.0" layoutY="183.0" mnemonicParsing="false" text="Manager" />
-      <RadioButton fx:id="administratorRadio" layoutX="249.0" layoutY="183.0" mnemonicParsing="false" text="Administrator" />
-      <Label layoutX="22.0" layoutY="183.0" text="User Role:" />
-      <Button fx:id="submitButton" layoutX="70.0" layoutY="231.0" mnemonicParsing="false" text="Submit" />
-      <Button fx:id="cancelButton" layoutX="211.0" layoutY="231.0" mnemonicParsing="false" text="Cancel" />
+      <Label layoutX="22.0" layoutY="180.0" text="Department:" />
+      <TextField fx:id="departmentText" layoutX="96.0" layoutY="175.0" />
+      <TextField fx:id="userIDText" layoutX="96.0" layoutY="142.0" />
+      <PasswordField fx:id="passwordText" layoutX="96.0" layoutY="111.0" />
+      <TextField fx:id="usernameText" layoutX="96.0" layoutY="80.0" />
+      <TextField fx:id="firstNameText" layoutX="96.0" layoutY="18.0" />
+      <TextField fx:id="lastNameText" layoutX="96.0" layoutY="49.0" />
+      <Label layoutX="22.0" layoutY="146.0" text="User ID:" />
+      <Label layoutX="22.0" layoutY="115.0" text="Password:" />
+      <Label layoutX="22.0" layoutY="84.0" text="Username:" />
+      <Label layoutX="22.0" layoutY="22.0" text="First Name:" />
+      <Label layoutX="22.0" layoutY="53.0" text="Last Name:" />
+      <RadioButton fx:id="employeeRadio" layoutX="96.0" layoutY="210.0" mnemonicParsing="false" text="Employee" />
+      <RadioButton fx:id="managerRadio" layoutX="176.0" layoutY="210.0" mnemonicParsing="false" text="Manager" />
+      <RadioButton fx:id="administratorRadio" layoutX="249.0" layoutY="210.0" mnemonicParsing="false" text="Administrator" />
+      <Label layoutX="22.0" layoutY="213.0" text="User Role:" />
+      <Button fx:id="submitButton" layoutX="70.0" layoutY="231.0" mnemonicParsing="false" onAction="#submit" text="Submit" />
+      <Button fx:id="cancelButton" layoutX="211.0" layoutY="231.0" mnemonicParsing="false" onAction="#exit" text="Cancel" />
    </children>
 </AnchorPane>
