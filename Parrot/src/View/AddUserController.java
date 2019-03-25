@@ -55,6 +55,9 @@ public class AddUserController implements Initializable {
 
         //add items to combobox
         roles.getItems().addAll("Employee", "Manager", "Administrator");
+        
+        list = new UserList();
+        list.initializeList();
     }
 
     /**
@@ -75,8 +78,8 @@ public class AddUserController implements Initializable {
         UserCredentials newCredentials = new UserCredentials(userID, password);
         User newUser = new User(firstname, lastname, userID, role, department, newCredentials);
 
-        //add User to table
-
+        //add User to list
+        list.addUser(newUser);
 
 
 
