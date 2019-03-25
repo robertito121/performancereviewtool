@@ -40,4 +40,8 @@ public class UserList {
     public void setUserList(ArrayList<User> userList) {
         this.userList = userList;
     }
+    
+    public void addUser(User addedUser) {
+        userList.add(addedUser);
+    }
 }
