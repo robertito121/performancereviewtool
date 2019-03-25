@@ -95,8 +95,8 @@
          <children>
             <TableView prefHeight="314.0" prefWidth="385.0">
                <columns>
-                  <TableColumn prefWidth="75.0" text="C1" />
-                  <TableColumn prefWidth="75.0" text="C2" />
+                  <TableColumn prefWidth="75.0" text="UserID" fx:id="UserId"/>
+                  <TableColumn prefWidth="75.0" text="Name" fx:id="UserName"/>
                </columns>
             </TableView>
          </children>
@@ -113,5 +113,6 @@
          </font>
       </Label>
       <ScrollPane layoutX="886.0" layoutY="402.0" prefHeight="421.0" prefWidth="385.0" AnchorPane.bottomAnchor="7.0" AnchorPane.rightAnchor="0.0" />
-   </children>
+      <Button fx:id="addButton" layoutX="900.0" layoutY="285.0" mnemonicParsing="false" onAction="#openAddUserView" text="Add User" />
+   </children>       
 </AnchorPane>
