@@ -72,7 +72,7 @@ public class UserList {
         }
     }
     
-    public void writeMovieListFile() {
+    public void writeUserListFile() {
         FileOutputStream fos = null;
         ObjectOutputStream out = null;
         try {
