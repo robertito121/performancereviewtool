@@ -8,36 +8,42 @@ package View;
 import Model.User;
 import Model.UserList;
 import Model.UserCredentials;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+/**
+ * FXML Controller class
+ *
+ * @author Group 2
+ */
 public class AddUserController implements Initializable {
 
     @FXML
     private TextField departmentText;
-    
-    @FXML
-    private TextField userIDText;
-    
-    @FXML
-    private PasswordField passwordText;    
 
     @FXML
-    private TextField firstNameText;    
- 
+    private TextField userIDText;
+
     @FXML
-    private TextField lastNameText;     
+    private PasswordField passwordText;
+
+    @FXML
+    private TextField firstNameText;
+
+    @FXML
+    private TextField lastNameText;
 
     @FXML
     private Button submitButton;
 
-    @FXML
-    private Button clearFormButton;
-    
     @FXML
     private Button cancelButton;
 
@@ -46,7 +52,7 @@ public class AddUserController implements Initializable {
 
     private UserList list;
 
-
+    private String currentUserID;
     /**
      * Initializes the controller class.
      */
@@ -55,16 +61,14 @@ public class AddUserController implements Initializable {
 
         //add items to combobox
         roles.getItems().addAll("Employee", "Manager", "Administrator");
-        
+
         list = new UserList();
-        list.initializeList();
+        
+        
     }
 
-    /**
-     * submits a new User into the application
-     */
     @FXML
-    public void submit() {
+    public void submit() throws IOException {
 
         //get user information
         String firstname = firstNameText.getText();
@@ -77,117 +81,83 @@ public class AddUserController implements Initializable {
         //build User Object
         UserCredentials newCredentials = new UserCredentials(userID, password);
         User newUser = new User(firstname, lastname, userID, role, department, newCredentials);
+        
+        if(newUser.getUserId().isEmpty()){
+            exit();
+            return;
+        }
 
         //add User to list
-        list.addUser(newUser);
+        list.getUserList().add(newUser);
+        list.writeUserListFile();
 
-
-
+        //Close Add View
+        Stage addStage = (Stage) departmentText.getScene().getWindow();
+        addStage.close();
+        
+        //Open Home View
+        openHomeView();
     }
 
-    /**
-     * Clears the Form
-     */
     @FXML
-    public void clearForm() {
-        firstNameText.clear();
-        lastNameText.clear();
-        userIDText.clear();
-        passwordText.clear();
-        departmentText.clear();
-        roles.setValue(null);
+    public void exit() throws IOException {
+        Stage addStage = (Stage) cancelButton.getScene().getWindow();
+        addStage.close();
+        
+        openHomeView();
     }
 
-    /**
-     * closes the AddUserView
-     */
-    @FXML
-    public void exit() {
-            Stage addStage = (Stage) cancelButton.getScene().getWindow();
-            addStage.close();
-    }
-    
     public void passUserList(UserList passedList) {
         list = passedList;
     }
+    
+    public void openHomeView() throws IOException {
+        //Re-Open HomeView
+        FXMLLoader homeViewLoader = new FXMLLoader(getClass().getResource("HomeView.fxml"));
+        Parent homeView = (Parent) homeViewLoader.load();
+        Stage homeViewStage = new Stage();
+        homeViewStage.setTitle("Performance Review Tool (Parrot) ");
+        homeViewStage.setScene(new Scene(homeView));
+        homeViewStage.show();
 
-    public TextField getDepartmentText() {
-        return departmentText;
+        User authenticatedUser = getUser();
+        String firstName = authenticatedUser.getFirstName();
+        String lastName = authenticatedUser.getLastName();
+        String userId = authenticatedUser.getUserId();
+        String Role = authenticatedUser.getRole();
+        HomeController homeController = homeViewLoader.getController();
+        homeController.populateMyProfilePane(firstName, lastName, userId, Role);
+    }
+    
+    //Get current user with ID from HomeController
+    public User getUser() {
+        String username = currentUserID;
+        User user = null;
+
+        for (int i = 0; i < list.getUserList().size(); i++) {
+            if (username.equals(list.getUserList().get(i).getUserCredentials().getUserName())) {
+                user = list.getUserList().get(i);
+                break;
+            }
+            else {
+                user = null;
+            }
+        }
+        return user;
     }
 
-    public void setDepartmentText(TextField departmentText) {
-        this.departmentText = departmentText;
+    /**
+     * @return the currentUserID
+     */
+    public String getCurrentUserID() {
+        return currentUserID;
     }
 
-    public TextField getUserIDText() {
-        return userIDText;
+    /**
+     * @param currentUserID the currentUserID to set
+     */
+    public void setCurrentUserID(String currentUserID) {
+        this.currentUserID = currentUserID;
     }
 
-    public void setUserIDText(TextField userIDText) {
-        this.userIDText = userIDText;
-    }
-
-    public PasswordField getPasswordText() {
-        return passwordText;
-    }
-
-    public void setPasswordText(PasswordField passwordText) {
-        this.passwordText = passwordText;
-    }
-
-    public TextField getFirstNameText() {
-        return firstNameText;
-    }
-
-    public void setFirstNameText(TextField firstNameText) {
-        this.firstNameText = firstNameText;
-    }
-
-    public TextField getLastNameText() {
-        return lastNameText;
-    }
-
-    public void setLastNameText(TextField lastNameText) {
-        this.lastNameText = lastNameText;
-    }
-
-    public Button getSubmitButton() {
-        return submitButton;
-    }
-
-    public void setSubmitButton(Button submitButton) {
-        this.submitButton = submitButton;
-    }
-
-    public Button getClearFormButton() {
-        return clearFormButton;
-    }
-
-    public void setClearFormButton(Button clearFormButton) {
-        this.clearFormButton = clearFormButton;
-    }
-
-    public Button getCancelButton() {
-        return cancelButton;
-    }
-
-    public void setCancelButton(Button cancelButton) {
-        this.cancelButton = cancelButton;
-    }
-
-    public ComboBox<String> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(ComboBox<String> roles) {
-        this.roles = roles;
-    }
-
-    public UserList getList() {
-        return list;
-    }
-
-    public void setList(UserList list) {
-        this.list = list;
-    }
 }
