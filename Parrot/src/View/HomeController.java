@@ -17,6 +17,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -50,18 +52,17 @@ public class HomeController implements Initializable {
 
     @FXML
     private Label userProfileRole;
-    
-    @FXML 
-    private TableView<User> tableView;
-    
-    @FXML 
-    private TableColumn<User, String> UserId;
-    
-    @FXML 
-    private TableColumn<User, String> UserName;
-    
-    private UserList userList;
 
+    @FXML
+    private TableView<User> tableView;
+
+    @FXML
+    private TableColumn<User, String> UserId;
+
+    @FXML
+    private TableColumn<User, String> UserName;
+
+    private UserList userList;
 
     public HomeController() {
 
@@ -70,16 +71,16 @@ public class HomeController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         userList = new UserList();
-        userList.initializeList();
-        
+
         UserId.setCellValueFactory(new PropertyValueFactory<>("userId"));
         UserName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
-        
+
         fillTable();
     }
 
     /**
      * Populates the "My Profile" section with authenticated user information
+     *
      * @param firstName
      * @param lastName
      * @param userID
@@ -112,18 +113,34 @@ public class HomeController implements Initializable {
         manageUsersViewStage.setScene(new Scene(manageUsersView));
         manageUsersViewStage.show();
     }
-       
+
     @FXML
     public void openAddUserView() throws IOException {
-        
+
+        // close current homeview
+        Stage homeStage = (Stage) homeScreen.getScene().getWindow();
+        homeStage.close();
+
         // set addUserView
         FXMLLoader addUserViewLoader = new FXMLLoader(getClass().getResource("AddUserView.fxml"));
         Parent addUserView = (Parent) addUserViewLoader.load();
         Stage addUserViewStage = new Stage();
-        addUserViewStage.setTitle("Add User");
+        addUserViewStage.setTitle("Manage Users");
         addUserViewStage.setScene(new Scene(addUserView));
         addUserViewStage.show();
+        
+        // pass currentID value to add user controller
+        AddUserController addController = addUserViewLoader.getController();
+        addController.setCurrentUserID(getMyProfileUserID().getText());
     }
+    
+    public void RemoveUser() {
+        User removeUser = tableView.getSelectionModel().getSelectedItem();
+        userList.getUserList().remove(removeUser);
+        userList.writeUserListFile();
+        fillTable();
+    }
+    
 
     public AnchorPane getHomeScreen() {
         return homeScreen;
@@ -196,18 +213,17 @@ public class HomeController implements Initializable {
     public void setUserProfileRole(Label userProfileRole) {
         this.userProfileRole = userProfileRole;
     }
-    
-    
+
     public void fillTable() {
         tableView.setItems(getUsers());
     }
-    
+
     //Creates list to populate table
-    private ObservableList<User> getUsers(){
+    private ObservableList<User> getUsers() {
         ObservableList<User> users = FXCollections.observableArrayList();
-        
-        for(int i = 0; i < userList.getUserList().size(); i++){
-        users.add(userList.getUserList().get(i));
+
+        for (int i = 0; i < userList.getUserList().size(); i++) {
+            users.add(userList.getUserList().get(i));
         }
         return users;
     }
