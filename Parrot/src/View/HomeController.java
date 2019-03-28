@@ -141,6 +141,19 @@ public class HomeController implements Initializable {
         fillTable();
     }
     
+    @FXML
+    public void logout() throws Exception{
+                
+        //close homeview
+        Stage homeStage = (Stage) homeScreen.getScene().getWindow();
+        homeStage.close();
+        
+        Stage primaryStage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("View/LoginView.fxml"));
+        primaryStage.setTitle("Performance Review Tool");
+        primaryStage.setScene(new Scene(root, 390, 374));
+        primaryStage.show();
+    }
 
     public AnchorPane getHomeScreen() {
         return homeScreen;
