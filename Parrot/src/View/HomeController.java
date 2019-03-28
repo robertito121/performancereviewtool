@@ -60,10 +60,16 @@ public class HomeController implements Initializable {
     private TableView<User> tableView;
 
     @FXML
-    private TableColumn<User, String> UserId;
+    private TableColumn<User, String> userIdHeader;
 
     @FXML
-    private TableColumn<User, String> UserName;
+    private TableColumn<User, String> userFirstNameHeader;
+
+    @FXML
+    private TableColumn<User, String> userLastNameHeader;
+
+    @FXML
+    private TableColumn<User, String> userRoleHeader;
 
     private UserList userList;
 
@@ -75,8 +81,10 @@ public class HomeController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         userList = new UserList();
 
-        UserId.setCellValueFactory(new PropertyValueFactory<>("userId"));
-        UserName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        userIdHeader.setCellValueFactory(new PropertyValueFactory<>("userId"));
+        userFirstNameHeader.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        userLastNameHeader.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        userRoleHeader.setCellValueFactory(new PropertyValueFactory<>("role"));
 
         fillTable();
     }
@@ -165,7 +173,52 @@ public class HomeController implements Initializable {
         }
         
     }
-    
+
+    /**
+     * Populates the UserProfile Section with the selected user
+     * TODO: Retrieve performance data for each user and populate it on the report section
+     */
+    @FXML
+    public void selectUser() {
+
+        //get the User values of the selected user
+        String firstName = tableView.getSelectionModel().getSelectedItem().getFirstName();
+        String lastName = tableView.getSelectionModel().getSelectedItem().getLastName();
+        String userId = tableView.getSelectionModel().getSelectedItem().getUserId();
+        String role =  tableView.getSelectionModel().getSelectedItem().getRole();
+
+        //populate the User Profile section
+        userProfileFirstName.setText(firstName);
+        userProfileLastName.setText(lastName);
+        userProfileUserID.setText(userId);
+        userProfileRole.setText(role);
+
+    }
+
+    /**
+     * Fills the table with the ObservableList
+     */
+    public void fillTable() {
+        tableView.setItems(getUsers());
+    }
+
+    /**
+     * Creates ObservableList used to populate the Table
+      * @return ObservableList<User>
+     */
+    private ObservableList<User> getUsers() {
+        ObservableList<User> users = FXCollections.observableArrayList();
+
+        for (int i = 0; i < userList.getUserList().size(); i++) {
+            users.add(userList.getUserList().get(i));
+        }
+        return users;
+    }
+
+    /**
+     * logs out of the home View into the log in screen
+     * @throws Exception
+     */
     @FXML
     public void logout() throws Exception{
                 
@@ -250,20 +303,6 @@ public class HomeController implements Initializable {
 
     public void setUserProfileRole(Label userProfileRole) {
         this.userProfileRole = userProfileRole;
-    }
-
-    public void fillTable() {
-        tableView.setItems(getUsers());
-    }
-
-    //Creates list to populate table
-    private ObservableList<User> getUsers() {
-        ObservableList<User> users = FXCollections.observableArrayList();
-
-        for (int i = 0; i < userList.getUserList().size(); i++) {
-            users.add(userList.getUserList().get(i));
-        }
-        return users;
     }
 
 }

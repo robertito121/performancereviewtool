@@ -6,9 +6,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="625.0" prefWidth="863.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.ManageUsersController">
+<AnchorPane id="AnchorPane" prefHeight="607.0" prefWidth="856.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.ManageUsersController">
    <children>
-      <Pane layoutX="177.0" layoutY="462.0" prefHeight="163.0" prefWidth="492.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="177.0" AnchorPane.rightAnchor="194.0">
+      <Pane layoutX="206.0" layoutY="399.0" prefHeight="163.0" prefWidth="492.0" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="206.0" AnchorPane.rightAnchor="165.0">
          <children>
             <Button fx:id="addUserButton" layoutX="14.0" layoutY="30.0" mnemonicParsing="false" onAction="#displayAddUserView" prefHeight="41.0" prefWidth="133.0" text="Add New User" />
             <Button fx:id="backButton" layoutX="177.0" layoutY="108.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="122.0" text="Cancel" />
@@ -16,12 +16,15 @@
             <Button fx:id="deleteUserButton" layoutX="321.0" layoutY="30.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="133.0" text="Delete User" />
          </children>
       </Pane>
-      <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="15.0" layoutY="10.0" prefHeight="418.0" prefWidth="831.0" AnchorPane.bottomAnchor="197.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="10.0">
+      <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="62.0" layoutY="31.0" prefHeight="374.0" prefWidth="741.0" AnchorPane.bottomAnchor="202.0" AnchorPane.leftAnchor="62.0" AnchorPane.rightAnchor="53.0" AnchorPane.topAnchor="31.0">
          <content>
-            <TableView maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="417.0" prefWidth="830.0">
+            <TableView fx:id="tableView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="374.0" prefWidth="740.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
+                <TableColumn fx:id="userIdHeader" prefWidth="108.0" text="User ID" />
+                <TableColumn fx:id="userFirstNameHeader" prefWidth="163.0" text="First Name " />
+                  <TableColumn fx:id="userLastNameHeader" prefWidth="125.0" text="Last Name" />
+                  <TableColumn fx:id="userRoleHeader" minWidth="0.0" prefWidth="151.0" text="Role" />
+                  <TableColumn fx:id="departmentRoleHeader" prefWidth="178.0" text="Department" />
               </columns>
             </TableView>
          </content>
