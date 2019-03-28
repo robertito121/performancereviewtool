@@ -20,6 +20,9 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.*;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -135,10 +138,32 @@ public class HomeController implements Initializable {
     }
     
     public void RemoveUser() {
+        
         User removeUser = tableView.getSelectionModel().getSelectedItem();
-        userList.getUserList().remove(removeUser);
-        userList.writeUserListFile();
-        fillTable();
+        
+        if (removeUser == null) {
+            
+            Alert nulluser = new Alert(AlertType.ERROR, "Error! No User Selected!");
+            nulluser.showAndWait();
+        }
+        else if (this.getMyProfileUserID().getText().equals(removeUser.getUserId())) {
+            
+            Alert removeerror = new Alert(AlertType.ERROR, "Error! You cannot remove yourself!");
+            removeerror.showAndWait();
+        }
+        else {
+           
+            Alert alert = new Alert(AlertType.CONFIRMATION, "Are you sure you want to delete user " + removeUser.getFirstName() + " " + removeUser.getLastName() + "?", ButtonType.YES, ButtonType.NO);
+            alert.showAndWait(); 
+            
+            if (alert.getResult() == ButtonType.YES) {
+        
+                userList.getUserList().remove(removeUser);
+                userList.writeUserListFile();
+                fillTable();
+            }
+        }
+        
     }
     
     @FXML
