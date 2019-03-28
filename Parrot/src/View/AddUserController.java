@@ -53,6 +53,9 @@ public class AddUserController implements Initializable {
     private UserList list;
 
     private String currentUserID;
+    
+    private String firstname, lastname, userID, password, department, role;
+    
     /**
      * Initializes the controller class.
      */
@@ -63,28 +66,64 @@ public class AddUserController implements Initializable {
         roles.getItems().addAll("Employee", "Manager", "Administrator");
 
         list = new UserList();
-        
-        
     }
 
     @FXML
     public void submit() throws IOException {
 
-        //get user information
-        String firstname = firstNameText.getText();
-        String lastname = lastNameText.getText();
-        String userID = userIDText.getText();
-        String password = passwordText.getText();
-        String department = departmentText.getText();
-        String role = roles.getValue();
+        //get user information and make sure no empty fields
+        if (!firstNameText.getText().equals("")) {
+            firstname = firstNameText.getText();
+        } else {
+            Warning();
+            return;
+        }
+        if (!lastNameText.getText().equals("")) {
+            lastname = lastNameText.getText();
+        } else {
+            Warning();
+            return;
+        }
+        if (!userIDText.getText().equals("")) {
+            userID = userIDText.getText();
+        } else {
+            Warning();
+            return;
+        }
+        if (!passwordText.getText().equals("")) {
+            password = passwordText.getText();
+        } else {
+            Warning();
+            return;
+        }
+        if (!departmentText.getText().equals("")) {
+            department = departmentText.getText();
+        } else {
+            Warning();
+            return;
+        }
+        if (roles.getSelectionModel().getSelectedIndex() != -1) {
+            role = roles.getValue();
+        } else {
+            Warning();
+            return;
+        }
 
         //build User Object
         UserCredentials newCredentials = new UserCredentials(userID, password);
         User newUser = new User(firstname, lastname, userID, role, department, newCredentials);
-        
-        if(newUser.getUserId().isEmpty()){
-            exit();
-            return;
+
+        //Make sure no duplicate IDs
+        for (int i = 0; i < list.getUserList().size(); i++) {
+            if (newUser.getUserId().equals(list.getUserList().get(i).getUserId())) {
+                Alert alert = new Alert(AlertType.ERROR,
+                        "UserID already exists.",
+                        ButtonType.OK);
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == ButtonType.OK) {
+                    return;
+                }
+            }
         }
 
         //add User to list
@@ -94,9 +133,21 @@ public class AddUserController implements Initializable {
         //Close Add View
         Stage addStage = (Stage) departmentText.getScene().getWindow();
         addStage.close();
-        
-        //Open Home View
+
+        //Re-open Updated HomeView
         openHomeView();
+    }
+    
+    public void Warning() throws IOException {
+        Alert alert = new Alert(AlertType.WARNING,
+                    "Not all fields entered. Re-try?",
+                    ButtonType.YES, ButtonType.NO);
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.YES) {
+            } else {
+                exit();
+            }
     }
 
     @FXML
