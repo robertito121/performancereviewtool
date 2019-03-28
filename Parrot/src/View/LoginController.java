@@ -48,7 +48,6 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         userList = new UserList();
-        userList.initializeList(); //This initializes the userList with some default data
 
     }
 
