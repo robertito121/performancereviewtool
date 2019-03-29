@@ -21,10 +21,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class ManageUsersController implements Initializable {
 
+    @FXML
+    private AnchorPane manageUsersView;
+    
     @FXML
     private TableColumn<User, String> userIdHeader;
 
@@ -71,6 +75,9 @@ public class ManageUsersController implements Initializable {
     @FXML
     public void displayAddUserView() throws IOException {
 
+        Stage manageUsersStage = (Stage) manageUsersView.getScene().getWindow();
+        manageUsersStage.close();
+        
         // set addUserView
         FXMLLoader addUserViewLoader = new FXMLLoader(getClass().getResource("AddUserView.fxml"));
         Parent addUserView = (Parent) addUserViewLoader.load();
