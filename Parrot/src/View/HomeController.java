@@ -116,6 +116,10 @@ public class HomeController implements Initializable {
     @FXML
     public void showManageUsersView() throws IOException {
 
+        // close current homeview
+        Stage homeStage = (Stage) homeScreen.getScene().getWindow();
+        homeStage.close();
+        
         // set ManageUsersView
         FXMLLoader manageUsersViewLoader = new FXMLLoader(getClass().getResource("ManageUsersView.fxml"));
         Parent manageUsersView = (Parent) manageUsersViewLoader.load();
