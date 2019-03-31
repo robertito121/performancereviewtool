@@ -101,7 +101,7 @@
       </Pane>
       <Pane layoutX="912.0" layoutY="32.0" prefHeight="369.0" prefWidth="399.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <TableView fx:id="tableView" prefHeight="314.0" prefWidth="399.0">
+            <TableView fx:id="tableView" editable="true" prefHeight="314.0" prefWidth="399.0">
                <columns>
                   <TableColumn fx:id="userIdHeader" editable="false" prefWidth="85.0" text="UserID" />
                   <TableColumn fx:id="userFirstNameHeader" editable="false" prefWidth="97.0" text="First Name" />

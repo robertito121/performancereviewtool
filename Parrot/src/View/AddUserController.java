@@ -10,8 +10,12 @@ import Model.UserList;
 import Model.UserCredentials;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -55,25 +59,37 @@ public class AddUserController implements Initializable {
     private UserList list;
 
     private String currentUserID;
+
+    private HomeController homeController;
+
+    private ManageUsersController manageUsersController;
     
-    private String firstname, lastname, userID, password, department, role;
+    private String firstname;
+    private String lastname;
+    private String userID;
+    private String password;
+    private String department;
+    private String role;
     
     /**
-     * Initializes the controller class.
+     * Initializes the controller class and all of its elements
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
         //add items to combobox
         roles.getItems().addAll("Employee", "Manager", "Administrator");
-
         list = new UserList();
     }
 
+    /**
+     * Submits a new User into the TableViews and Database
+     * @throws IOException
+     */
     @FXML
     public void submit() throws IOException {
 
-        //get user information and make sure no empty fields
+        //get user information and make sure there are no empty fields
         if (!firstNameText.getText().equals("")) {
             firstname = firstNameText.getText();
         } else {
@@ -115,7 +131,7 @@ public class AddUserController implements Initializable {
         UserCredentials newCredentials = new UserCredentials(userID, password);
         User newUser = new User(firstname, lastname, userID, role, department, newCredentials);
 
-        //Make sure no duplicate IDs
+        //Make sure no duplicate UserIDs exist
         for (int i = 0; i < list.getUserList().size(); i++) {
             if (newUser.getUserId().equals(list.getUserList().get(i).getUserId())) {
                 Alert alert = new Alert(AlertType.ERROR,
@@ -128,18 +144,19 @@ public class AddUserController implements Initializable {
             }
         }
 
-        //add User to list
+        //add User to database and TableViews
         list.getUserList().add(newUser);
         list.writeUserListFile();
+        homeController.addUser(newUser);
+        manageUsersController.addUser(newUser);
 
-        //Close Add View
-        Stage addStage = (Stage) departmentText.getScene().getWindow();
-        addStage.close();
-
-        //Re-open Updated HomeView
-        openHomeView();
     }
-    
+
+    /**
+     * Helper method to show a Warning if all the User information
+     * has not been entered into the AddUser Form
+     * @throws IOException
+     */
     public void Warning() throws IOException {
         Alert alert = new Alert(AlertType.WARNING,
                     "Not all fields entered. Re-try?",
@@ -152,37 +169,24 @@ public class AddUserController implements Initializable {
             }
     }
 
+    /**
+     * Exits the AddUserView by hitting the cancel button
+     * @throws IOException
+     */
     @FXML
     public void exit() throws IOException {
         Stage addStage = (Stage) cancelButton.getScene().getWindow();
         addStage.close();
-        
-        openHomeView();
     }
 
     public void passUserList(UserList passedList) {
         list = passedList;
     }
-    
-    public void openHomeView() throws IOException {
-        //Re-Open HomeView
-        FXMLLoader homeViewLoader = new FXMLLoader(getClass().getResource("HomeView.fxml"));
-        Parent homeView = (Parent) homeViewLoader.load();
-        Stage homeViewStage = new Stage();
-        homeViewStage.setTitle("Performance Review Tool (Parrot) ");
-        homeViewStage.setScene(new Scene(homeView));
-        homeViewStage.show();
 
-        User authenticatedUser = getUser();
-        String firstName = authenticatedUser.getFirstName();
-        String lastName = authenticatedUser.getLastName();
-        String userId = authenticatedUser.getUserId();
-        String Role = authenticatedUser.getRole();
-        HomeController homeController = homeViewLoader.getController();
-        homeController.populateMyProfilePane(firstName, lastName, userId, Role);
-    }
-    
-    //Get current user with ID from HomeController
+    /**
+     * Get current user with ID from HomeController
+     * @return User
+     */
     public User getUser() {
         String username = currentUserID;
         User user = null;
@@ -200,6 +204,14 @@ public class AddUserController implements Initializable {
     }
 
     /**
+     * Sets the HomeController field
+     * @param homeController
+     */
+    public void setHomeController(HomeController homeController) {
+        this.homeController = homeController;
+    }
+
+    /**
      * @return the currentUserID
      */
     public String getCurrentUserID() {
@@ -213,4 +225,135 @@ public class AddUserController implements Initializable {
         this.currentUserID = currentUserID;
     }
 
+    public TextField getDepartmentText() {
+        return departmentText;
+    }
+
+    public void setDepartmentText(TextField departmentText) {
+        this.departmentText = departmentText;
+    }
+
+    public TextField getUserIDText() {
+        return userIDText;
+    }
+
+    public void setUserIDText(TextField userIDText) {
+        this.userIDText = userIDText;
+    }
+
+    public PasswordField getPasswordText() {
+        return passwordText;
+    }
+
+    public void setPasswordText(PasswordField passwordText) {
+        this.passwordText = passwordText;
+    }
+
+    public TextField getFirstNameText() {
+        return firstNameText;
+    }
+
+    public void setFirstNameText(TextField firstNameText) {
+        this.firstNameText = firstNameText;
+    }
+
+    public TextField getLastNameText() {
+        return lastNameText;
+    }
+
+    public void setLastNameText(TextField lastNameText) {
+        this.lastNameText = lastNameText;
+    }
+
+    public Button getSubmitButton() {
+        return submitButton;
+    }
+
+    public void setSubmitButton(Button submitButton) {
+        this.submitButton = submitButton;
+    }
+
+    public Button getCancelButton() {
+        return cancelButton;
+    }
+
+    public void setCancelButton(Button cancelButton) {
+        this.cancelButton = cancelButton;
+    }
+
+    public ComboBox<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(ComboBox<String> roles) {
+        this.roles = roles;
+    }
+
+    public UserList getList() {
+        return list;
+    }
+
+    public void setList(UserList list) {
+        this.list = list;
+    }
+
+    public HomeController getHomeController() {
+        return homeController;
+    }
+
+    public ManageUsersController getManageUsersController() {
+        return manageUsersController;
+    }
+
+    public void setManageUsersController(ManageUsersController manageUsersController) {
+        this.manageUsersController = manageUsersController;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 }

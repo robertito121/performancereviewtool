@@ -8,7 +8,7 @@ public class User implements Serializable{
     protected String lastName;
     protected String userId;
     protected String role;
-    protected String department;
+    private String department;
     private UserCredentials userCredentials;
 
     public User(String firstName, String lastName, String userId, String role, String department,  UserCredentials credentials){
@@ -97,5 +97,13 @@ public class User implements Serializable{
 
     public void setUserCredentials(UserCredentials userCredentials) {
         this.userCredentials = userCredentials;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
     }
 }

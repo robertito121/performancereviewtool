@@ -12,14 +12,15 @@ public class UserList {
     private ArrayList<User> userList;
     private final String listOfUsers = "listOfUsers.ser";
 
+    /**
+     * Constructor
+     */
     public UserList() {
         userList = new ArrayList<>();
-        
         this.readUserListFile();
         if (userList.isEmpty()) {
             initializeList();
         }
-        //this.printUserListFile();
     }
 
     public void initializeList() {
@@ -82,13 +83,6 @@ public class UserList {
             out.close();
         } catch (IOException ex) {
             ex.printStackTrace();
-        }
-    }
-
-    private void printUserListFile() {
-        for (int i = 0; i < userList.size(); i++) {
-            User currentUser = (User) userList.get(i);
-            System.out.println(currentUser.getFirstName());
         }
     }
 }

@@ -1,12 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package View;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import Model.User;
@@ -18,6 +15,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -49,6 +48,9 @@ public class ManageUsersController implements Initializable {
 
     private UserList userList;
 
+    private ObservableList<User> userObservableList;
+
+    private HomeController homeController;
 
 
     /**
@@ -64,8 +66,8 @@ public class ManageUsersController implements Initializable {
         userLastNameHeader.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         userRoleHeader.setCellValueFactory(new PropertyValueFactory<>("role"));
         departmentRoleHeader.setCellValueFactory(new PropertyValueFactory<>("department"));
-
-        fillTable();
+        userObservableList = getUsersObservableList(userList.getUserList());
+        tableView.setItems(userObservableList);
     }
 
     /**
@@ -75,9 +77,6 @@ public class ManageUsersController implements Initializable {
     @FXML
     public void displayAddUserView() throws IOException {
 
-        Stage manageUsersStage = (Stage) manageUsersView.getScene().getWindow();
-        manageUsersStage.close();
-        
         // set addUserView
         FXMLLoader addUserViewLoader = new FXMLLoader(getClass().getResource("AddUserView.fxml"));
         Parent addUserView = (Parent) addUserViewLoader.load();
@@ -85,25 +84,150 @@ public class ManageUsersController implements Initializable {
         addUserViewStage.setTitle("Add User");
         addUserViewStage.setScene(new Scene(addUserView));
         addUserViewStage.show();
+
+        //pass Current Controller and HomeController to addUser Controller
+        // to add items into both tableViews
+        AddUserController addUserController = addUserViewLoader.getController();
+        addUserController.setHomeController(getHomeController());
+        addUserController.setManageUsersController(this);
     }
 
     /**
-     * Fills the table with the ObservableList
+     * Add a User to the current TableView
+     * @param newUser
      */
-    public void fillTable() {
-        tableView.setItems(getUsers());
+    public void addUser(User newUser) {
+        tableView.getItems().add(newUser);
+        tableView.refresh();
     }
 
     /**
-     * Creates ObservableList used to populate the Table
+     * Removes a User from the Database and TableView
+     */
+    @FXML
+    public void removeUser() {
+
+        String loggedInUserID = homeController.getMyProfileUserID().toString();
+
+        User removeUser = tableView.getSelectionModel().getSelectedItem();
+
+        if (removeUser == null) {
+
+            Alert nulluser = new Alert(Alert.AlertType.ERROR, "Error! No User Selected!");
+            nulluser.showAndWait();
+        }
+        else if (loggedInUserID.equals(removeUser.getUserId())) {
+
+            Alert removeerror = new Alert(Alert.AlertType.ERROR, "Error! You cannot remove yourself!");
+            removeerror.showAndWait();
+        }
+        else {
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete user " + removeUser.getFirstName() + " " + removeUser.getLastName() + "?", ButtonType.YES, ButtonType.NO);
+            alert.showAndWait();
+
+            if (alert.getResult() == ButtonType.YES) {
+
+                userList.getUserList().remove(removeUser);
+                userList.writeUserListFile();
+                tableView.getItems().remove(removeUser);
+                homeController.removeUser(removeUser);
+
+            }
+        }
+
+    }
+
+    /**
+     * Helper method used to convert an ArrayList of Users into an
+     * ObservableList of Users to be displayed into the TableView
      * @return ObservableList<User>
      */
-    private ObservableList<User> getUsers() {
+    public ObservableList<User> getUsersObservableList(ArrayList<User> userList) {
         ObservableList<User> users = FXCollections.observableArrayList();
-
-        for (int i = 0; i < userList.getUserList().size(); i++) {
-            users.add(userList.getUserList().get(i));
+        for (int i = 0; i < userList.size(); i++) {
+            users.add(userList.get(i));
         }
         return users;
+    }
+
+    public AnchorPane getManageUsersView() {
+        return manageUsersView;
+    }
+
+    public void setManageUsersView(AnchorPane manageUsersView) {
+        this.manageUsersView = manageUsersView;
+    }
+
+    public TableColumn<User, String> getUserIdHeader() {
+        return userIdHeader;
+    }
+
+    public void setUserIdHeader(TableColumn<User, String> userIdHeader) {
+        this.userIdHeader = userIdHeader;
+    }
+
+    public TableColumn<User, String> getUserFirstNameHeader() {
+        return userFirstNameHeader;
+    }
+
+    public void setUserFirstNameHeader(TableColumn<User, String> userFirstNameHeader) {
+        this.userFirstNameHeader = userFirstNameHeader;
+    }
+
+    public TableColumn<User, String> getUserLastNameHeader() {
+        return userLastNameHeader;
+    }
+
+    public void setUserLastNameHeader(TableColumn<User, String> userLastNameHeader) {
+        this.userLastNameHeader = userLastNameHeader;
+    }
+
+    public TableColumn<User, String> getUserRoleHeader() {
+        return userRoleHeader;
+    }
+
+    public void setUserRoleHeader(TableColumn<User, String> userRoleHeader) {
+        this.userRoleHeader = userRoleHeader;
+    }
+
+    public TableColumn<User, String> getDepartmentRoleHeader() {
+        return departmentRoleHeader;
+    }
+
+    public void setDepartmentRoleHeader(TableColumn<User, String> departmentRoleHeader) {
+        this.departmentRoleHeader = departmentRoleHeader;
+    }
+
+    public TableView<User> getTableView() {
+        return tableView;
+    }
+
+    public void setTableView(TableView<User> tableView) {
+        this.tableView = tableView;
+    }
+
+    public UserList getUserList() {
+        return userList;
+    }
+
+    public void setUserList(UserList userList) {
+        this.userList = userList;
+    }
+
+    public ObservableList<User> getUserObservableList() {
+        return userObservableList;
+    }
+
+    public void setUserObservableList(ObservableList<User> userObservableList) {
+        this.userObservableList = userObservableList;
+    }
+
+    public HomeController getHomeController() {
+        return homeController;
+    }
+
+    public void setHomeController(HomeController homeController) {
+        this.homeController = homeController;
     }
 }

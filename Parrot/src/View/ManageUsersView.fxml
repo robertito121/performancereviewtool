@@ -6,19 +6,19 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="manageUsersView" id="AnchorPane" prefHeight="607.0" prefWidth="856.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.ManageUsersController">
+<AnchorPane id="AnchorPane" fx:id="manageUsersView" prefHeight="592.0" prefWidth="857.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.ManageUsersController">
    <children>
-      <Pane layoutX="206.0" layoutY="399.0" prefHeight="163.0" prefWidth="492.0" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="206.0" AnchorPane.rightAnchor="165.0">
+      <Pane layoutX="123.0" layoutY="403.0" prefHeight="82.0" prefWidth="610.0" AnchorPane.bottomAnchor="107.0" AnchorPane.leftAnchor="123.0" AnchorPane.rightAnchor="123.0">
          <children>
-            <Button fx:id="addUserButton" layoutX="14.0" layoutY="30.0" mnemonicParsing="false" onAction="#displayAddUserView" prefHeight="41.0" prefWidth="133.0" text="Add New User" />
-            <Button fx:id="backButton" layoutX="177.0" layoutY="108.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="122.0" text="Cancel" />
-            <Button fx:id="modifyUserButton" layoutX="177.0" layoutY="30.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="122.0" text="Modify User" />
-            <Button fx:id="deleteUserButton" layoutX="321.0" layoutY="30.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="133.0" text="Delete User" />
+            <Button fx:id="addUserButton" layoutX="162.0" layoutY="30.0" mnemonicParsing="false" onAction="#displayAddUserView" prefHeight="41.0" prefWidth="133.0" text="Add New User" />
+            <Button fx:id="modifyUserButton" layoutX="316.0" layoutY="30.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="122.0" text="Modify User" />
+            <Button fx:id="deleteUserButton" layoutX="463.0" layoutY="30.0" mnemonicParsing="false" onAction="#removeUser" prefHeight="41.0" prefWidth="133.0" text="Remove User" />
+            <Button fx:id="modifyUserButton1" layoutX="22.0" layoutY="30.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="122.0" text="Select User" />
          </children>
       </Pane>
       <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="62.0" layoutY="31.0" prefHeight="374.0" prefWidth="741.0" AnchorPane.bottomAnchor="202.0" AnchorPane.leftAnchor="62.0" AnchorPane.rightAnchor="53.0" AnchorPane.topAnchor="31.0">
          <content>
-            <TableView fx:id="tableView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="374.0" prefWidth="740.0">
+            <TableView fx:id="tableView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="382.0" prefWidth="742.0">
               <columns>
                 <TableColumn fx:id="userIdHeader" prefWidth="108.0" text="User ID" />
                 <TableColumn fx:id="userFirstNameHeader" prefWidth="163.0" text="First Name " />
