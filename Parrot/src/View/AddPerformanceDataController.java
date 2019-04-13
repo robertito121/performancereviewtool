@@ -20,11 +20,6 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
-/**
- * FXML Controller class
- *
- * @author Group 2
- */
 public class AddPerformanceDataController implements Initializable {
 
     @FXML
@@ -80,7 +75,10 @@ public class AddPerformanceDataController implements Initializable {
         this.userID = userID;
         nameLabel.setText(firstName + " " + lastName);
     }
-    
+
+    /**
+     * submit the Form
+     */
     public void Submit() {
 
         //build date

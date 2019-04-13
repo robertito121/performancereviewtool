@@ -15,6 +15,9 @@ public class PerformanceDataList {
     private Map<String, ArrayList<PerformanceData>> performanceDataMap = new HashMap<>();
     private String fileName = "performanceDataList.ser";
 
+    /**
+     * constructor
+     */
     public PerformanceDataList() {
         readPerformanceDataListFromFile();
         if (performanceDataMap.isEmpty() || performanceDataMap == null) {
@@ -24,6 +27,11 @@ public class PerformanceDataList {
         }
     }
 
+    /**
+     * Adds performanceData into the HashMap by UserId
+     * @param userId
+     * @param data
+     */
     public void addPerformanceDatatoHashMap(String userId, PerformanceData data) {
         ArrayList<PerformanceData> dataList = getPerformanceDataByUserId(userId);
         dataList.add(data);
@@ -31,11 +39,19 @@ public class PerformanceDataList {
         writePerformanceDataListToFile();
     }
 
+    /**
+     * Gets an ArrayList of PerformanceData by UserId
+     * @param userId
+     * @return
+     */
     public ArrayList<PerformanceData> getPerformanceDataByUserId(String userId) {
         setInstanceCounterToLastSetValue(userId);
         return performanceDataMap.get(userId);
     }
 
+    /**
+     * Populates initial data
+     */
     public void populatePerformanceData() {
         UserList userList = new UserList();
         ArrayList<User> users = userList.getUserList();
@@ -52,10 +68,15 @@ public class PerformanceDataList {
      * @param data
      */
     public void createUserPlaceHolder(String userId, ArrayList<PerformanceData> data) {
-        performanceDataMap.put(userId, data);
-        writePerformanceDataListToFile();
+        if (performanceDataMap.get(userId) == null) {
+            performanceDataMap.put(userId, data);
+            performanceDataMap.put(userId, data);
+        }
     }
 
+    /**
+     * reads performanceData from file
+     */
     private void readPerformanceDataListFromFile() {
         FileInputStream fis = null;
         ObjectInputStream in = null;
@@ -74,6 +95,9 @@ public class PerformanceDataList {
         }
     }
 
+    /**
+     * writes performanceData to file
+     */
     private void writePerformanceDataListToFile() {
         FileOutputStream fos = null;
         ObjectOutputStream out = null;
@@ -89,6 +113,10 @@ public class PerformanceDataList {
         }
     }
 
+    /**
+     * Set the instanceCounter to the last known set value for each user
+     * @param userId
+     */
     public void setInstanceCounterToLastSetValue(String userId) {
 
        ArrayList<PerformanceData> data = performanceDataMap.get(userId);

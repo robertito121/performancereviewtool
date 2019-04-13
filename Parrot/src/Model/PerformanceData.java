@@ -23,7 +23,21 @@ public class PerformanceData implements Serializable {
 
     private static int instanceCounter = 1;
     private int counter;
-    
+
+    /**
+     * Constructor
+     * @param userID
+     * @param reportId
+     * @param date
+     * @param measure1Rating
+     * @param measure1Comment
+     * @param measure2Rating
+     * @param measure2Comment
+     * @param measure3Rating
+     * @param measure3Comment
+     * @param additionalComments
+     * @param totalRating
+     */
     public PerformanceData(String userID, String reportId,  String date, int measure1Rating, String measure1Comment, int measure2Rating, String measure2Comment, int measure3Rating, String measure3Comment, String additionalComments, double totalRating) {
         
         this.userID = userID;
@@ -42,14 +56,29 @@ public class PerformanceData implements Serializable {
         counter = instanceCounter;
     }
 
+    /**
+     * Calculates the total rating of the performance report
+     * @param measure1Rating
+     * @param measure2Rating
+     * @param measure3Rating
+     * @return double
+     */
     public static double calculateTotalRating(double measure1Rating, double measure2Rating, double measure3Rating) {
         return measure1Rating + measure2Rating +  measure3Rating;
     }
 
+    /**
+     * Gets the instance Counter
+     * @return int
+     */
     public static int getInstanceCounter() {
         return instanceCounter;
     }
 
+    /**
+     * Sets the Instance Counter
+     * @param instanceCounter
+     */
     public static void setInstanceCounter(int instanceCounter) {
         PerformanceData.instanceCounter = instanceCounter;
     }
