@@ -333,8 +333,12 @@ public class HomeController implements Initializable {
         primaryStage.setScene(new Scene(root, 390, 374));
         primaryStage.show();
     }
-    
-        public void newReport() throws IOException {
+
+    /**
+     * Open the Add Report Window
+     * @throws IOException
+     */
+    public void newReport() throws IOException {
 
         // set addPerformanceDataView
         FXMLLoader addPerformanceDataViewLoader = new FXMLLoader(getClass().getResource("AddPerformanceDataView.fxml"));
@@ -475,5 +479,77 @@ public class HomeController implements Initializable {
 
     public void setUserList(UserList userList) {
         this.userList = userList;
+    }
+
+    public Button getNewReportButton() {
+        return newReportButton;
+    }
+
+    public void setNewReportButton(Button newReportButton) {
+        this.newReportButton = newReportButton;
+    }
+
+    public TableView<User> getUserTableView() {
+        return userTableView;
+    }
+
+    public void setUserTableView(TableView<User> userTableView) {
+        this.userTableView = userTableView;
+    }
+
+    public TableView<PerformanceData> getPerformanceDataTableView() {
+        return performanceDataTableView;
+    }
+
+    public void setPerformanceDataTableView(TableView<PerformanceData> performanceDataTableView) {
+        this.performanceDataTableView = performanceDataTableView;
+    }
+
+    public TableColumn<PerformanceData, String> getPerformanceDataDateHeader() {
+        return performanceDataDateHeader;
+    }
+
+    public void setPerformanceDataDateHeader(TableColumn<PerformanceData, String> performanceDataDateHeader) {
+        this.performanceDataDateHeader = performanceDataDateHeader;
+    }
+
+    public TableColumn<PerformanceData, String> getPerformanceDataReportIDHeader() {
+        return performanceDataReportIDHeader;
+    }
+
+    public void setPerformanceDataReportIDHeader(TableColumn<PerformanceData, String> performanceDataReportIDHeader) {
+        this.performanceDataReportIDHeader = performanceDataReportIDHeader;
+    }
+
+    public TableColumn<PerformanceData, Double> getPerformanceDataTotalRatingHeader() {
+        return performanceDataTotalRatingHeader;
+    }
+
+    public void setPerformanceDataTotalRatingHeader(TableColumn<PerformanceData, Double> performanceDataTotalRatingHeader) {
+        this.performanceDataTotalRatingHeader = performanceDataTotalRatingHeader;
+    }
+
+    public PerformanceDataList getPerformanceDataList() {
+        return performanceDataList;
+    }
+
+    public void setPerformanceDataList(PerformanceDataList performanceDataList) {
+        this.performanceDataList = performanceDataList;
+    }
+
+    public ObservableList<User> getUserObservableList() {
+        return userObservableList;
+    }
+
+    public void setUserObservableList(ObservableList<User> userObservableList) {
+        this.userObservableList = userObservableList;
+    }
+
+    public ObservableList<PerformanceData> getPerformanceDataObservableList() {
+        return performanceDataObservableList;
+    }
+
+    public void setPerformanceDataObservableList(ObservableList<PerformanceData> performanceDataObservableList) {
+        this.performanceDataObservableList = performanceDataObservableList;
     }
 }

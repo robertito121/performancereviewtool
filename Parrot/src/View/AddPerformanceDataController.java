@@ -14,11 +14,13 @@ import java.util.ResourceBundle;
 import Model.PerformanceDataList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class AddPerformanceDataController implements Initializable {
 
@@ -65,11 +67,7 @@ public class AddPerformanceDataController implements Initializable {
         performanceDataList = new PerformanceDataList();
 
     }
-    
-    public void setHomeController(HomeController homeController) {
-        this.homeController = homeController;
-    }
-    
+
     public void setSelectedUser(String userID, String firstName, String lastName) {
         
         this.userID = userID;
@@ -99,7 +97,126 @@ public class AddPerformanceDataController implements Initializable {
                                               totalRating
                                              );
 
+        //add performanceData Object to List and tableView
         performanceDataList.addPerformanceDatatoHashMap(userID, performanceData);
+        homeController.getPerformanceDataTableView().getItems().add(performanceData);
+        homeController.getPerformanceDataTableView().refresh();
+
+        //close the Add performanceData Stage
+        Stage stage = (Stage) nameLabel.getScene().getWindow();
+        stage.close();
+
     }
-    
+
+    public Label getNameLabel() {
+        return nameLabel;
+    }
+
+    public void setNameLabel(Label nameLabel) {
+        this.nameLabel = nameLabel;
+    }
+
+    public Slider getMeasure1Slider() {
+        return measure1Slider;
+    }
+
+    public void setMeasure1Slider(Slider measure1Slider) {
+        this.measure1Slider = measure1Slider;
+    }
+
+    public TextField getMeasure1Text() {
+        return measure1Text;
+    }
+
+    public void setMeasure1Text(TextField measure1Text) {
+        this.measure1Text = measure1Text;
+    }
+
+    public Slider getMeasure2Slider() {
+        return measure2Slider;
+    }
+
+    public void setMeasure2Slider(Slider measure2Slider) {
+        this.measure2Slider = measure2Slider;
+    }
+
+    public TextField getMeasure2Text() {
+        return measure2Text;
+    }
+
+    public void setMeasure2Text(TextField measure2Text) {
+        this.measure2Text = measure2Text;
+    }
+
+    public Slider getMeasure3Slider() {
+        return measure3Slider;
+    }
+
+    public void setMeasure3Slider(Slider measure3Slider) {
+        this.measure3Slider = measure3Slider;
+    }
+
+    public TextField getMeasure3Text() {
+        return measure3Text;
+    }
+
+    public void setMeasure3Text(TextField measure3Text) {
+        this.measure3Text = measure3Text;
+    }
+
+    public TextArea getAdditionalCommentsText() {
+        return additionalCommentsText;
+    }
+
+    public void setAdditionalCommentsText(TextArea additionalCommentsText) {
+        this.additionalCommentsText = additionalCommentsText;
+    }
+
+    public Button getSubmitButton() {
+        return submitButton;
+    }
+
+    public void setSubmitButton(Button submitButton) {
+        this.submitButton = submitButton;
+    }
+
+    public Button getCancelButton() {
+        return cancelButton;
+    }
+
+    public void setCancelButton(Button cancelButton) {
+        this.cancelButton = cancelButton;
+    }
+
+    public HomeController getHomeController() {
+        return homeController;
+    }
+
+    public void setHomeController(HomeController homeController) {
+        this.homeController = homeController;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    public PerformanceData getPerformanceData() {
+        return performanceData;
+    }
+
+    public void setPerformanceData(PerformanceData performanceData) {
+        this.performanceData = performanceData;
+    }
+
+    public PerformanceDataList getPerformanceDataList() {
+        return performanceDataList;
+    }
+
+    public void setPerformanceDataList(PerformanceDataList performanceDataList) {
+        this.performanceDataList = performanceDataList;
+    }
 }
