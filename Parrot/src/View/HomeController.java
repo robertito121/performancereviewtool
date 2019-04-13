@@ -283,6 +283,29 @@ public class HomeController implements Initializable {
         primaryStage.setScene(new Scene(root, 390, 374));
         primaryStage.show();
     }
+    
+        public void newReport() throws IOException {
+
+        // set addPerformanceDataView
+        FXMLLoader addPerformanceDataViewLoader = new FXMLLoader(getClass().getResource("AddPerformanceDataView.fxml"));
+        Parent addPerformanceDataView = (Parent) addPerformanceDataViewLoader.load();
+        Stage addPerformanceDataViewStage = new Stage();
+        addPerformanceDataViewStage.setTitle("New Report");
+        addPerformanceDataViewStage.setScene(new Scene(addPerformanceDataView));
+        addPerformanceDataViewStage.show();
+
+        
+        // pass selected user to the addPerformanceData controller
+        AddPerformanceDataController addPerformanceDataController = addPerformanceDataViewLoader.getController();
+        String firstName = userProfileFirstName.getText();
+        String lastName = userProfileLastName.getText();
+        String userId = userProfileUserID.getText();
+        addPerformanceDataController.setSelectedUser(userId, firstName, lastName);
+
+        //pass Current Controller to addPerformanceData Controller to add items
+        //into the current tableView
+        addPerformanceDataController.setHomeController(this);
+    }
 
     public AnchorPane getHomeScreen() {
         return homeScreen;

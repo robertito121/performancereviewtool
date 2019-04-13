@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="Parrot.jar" size="21766" download="eager" />
+    <jar href="Parrot.jar" size="29966" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="Parrot" >
     <param name="requiredFXVersion" value="8.0+"/>
