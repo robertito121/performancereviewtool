@@ -7,7 +7,11 @@ package View;
 
 import Model.PerformanceData;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
+
+import Model.PerformanceDataList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -25,10 +29,7 @@ public class AddPerformanceDataController implements Initializable {
 
     @FXML
     private Label nameLabel;
-    
-    @FXML
-    private TextField yearText;
-    
+
     @FXML
     private Slider measure1Slider;
     
@@ -59,28 +60,48 @@ public class AddPerformanceDataController implements Initializable {
     private HomeController homeController;
     private String userID;
     private PerformanceData performanceData;
+    private PerformanceDataList performanceDataList;
     
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        performanceDataList = new PerformanceDataList();
+
     }
     
     public void setHomeController(HomeController homeController) {
         this.homeController = homeController;
     }
     
-    public void setSelectedUser(String inf_userID, String inf_firstName, String inf_lastName) {
+    public void setSelectedUser(String userID, String firstName, String lastName) {
         
-        userID = inf_userID;
-        nameLabel.setText(inf_firstName + " " + inf_lastName);
+        this.userID = userID;
+        nameLabel.setText(firstName + " " + lastName);
     }
     
     public void Submit() {
-        
-        performanceData = new PerformanceData(userID, yearText.getText(), (int) measure1Slider.getValue(), measure1Text.getText(), (int) measure2Slider.getValue(), measure2Text.getText(), (int) measure3Slider.getValue(), measure3Text.getText(), additionalCommentsText.getText());
+
+        //build date
+        String datePattern = "yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(datePattern);
+        String date = simpleDateFormat.format(new Date());
+
+        //build reportId
+        String reportId = userID + PerformanceData.getInstanceCounter();
+
+        //build total rating for each report
+        double totalRating = PerformanceData.calculateTotalRating(measure1Slider.getValue(),measure2Slider.getValue(),measure3Slider.getValue());
+
+        //construct report object
+        performanceData = new PerformanceData(userID, reportId, date, (int) measure1Slider.getValue(),
+                                              measure1Text.getText(), (int) measure2Slider.getValue(), measure2Text.getText(),
+                                             (int) measure3Slider.getValue(), measure3Text.getText(), additionalCommentsText.getText(),
+                                              totalRating
+                                             );
+
+        performanceDataList.addPerformanceDatatoHashMap(userID, performanceData);
     }
     
 }

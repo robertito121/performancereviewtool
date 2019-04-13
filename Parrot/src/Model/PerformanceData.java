@@ -5,14 +5,12 @@
  */
 package Model;
 
-/**
- *
- * @author Group 2
- */
-public class PerformanceData {
+import java.io.Serializable;
+
+public class PerformanceData implements Serializable {
 
     private String userID;
-    private String year;
+    private String date;
     private int measure1Rating;
     private String measure1Comment;
     private int measure2Rating;
@@ -20,11 +18,17 @@ public class PerformanceData {
     private int measure3Rating;
     private String measure3Comment;
     private String additionalComments;
+    private double totalRating;
+    private String reportId;
+
+    private static int instanceCounter = 1;
+    private int counter;
     
-    public PerformanceData(String userID, String year, int measure1Rating, String measure1Comment, int measure2Rating, String measure2Comment, int measure3Rating, String measure3Comment, String additionalComments) {
+    public PerformanceData(String userID, String reportId,  String date, int measure1Rating, String measure1Comment, int measure2Rating, String measure2Comment, int measure3Rating, String measure3Comment, String additionalComments, double totalRating) {
         
         this.userID = userID;
-        this.year = year;
+        this.reportId = reportId;
+        this.date = date;
         this.measure1Rating = measure1Rating;
         this.measure1Comment = measure1Comment;
         this.measure2Rating = measure2Rating;
@@ -32,6 +36,22 @@ public class PerformanceData {
         this.measure3Rating = measure3Rating;
         this.measure3Comment = measure3Comment;
         this.additionalComments = additionalComments;
+        this.totalRating = totalRating;
+
+        instanceCounter++;
+        counter = instanceCounter;
+    }
+
+    public static double calculateTotalRating(double measure1Rating, double measure2Rating, double measure3Rating) {
+        return measure1Rating + measure2Rating +  measure3Rating;
+    }
+
+    public static int getInstanceCounter() {
+        return instanceCounter;
+    }
+
+    public static void setInstanceCounter(int instanceCounter) {
+        PerformanceData.instanceCounter = instanceCounter;
     }
     
     public String getUserID() {
@@ -49,15 +69,15 @@ public class PerformanceData {
     /**
      * @return the year
      */
-    public String getYear() {
-        return year;
+    public String getDate() {
+        return date;
     }
 
     /**
-     * @param year the year to set
+     * @param date the year to set
      */
-    public void setYear(String year) {
-        this.year = year;
+    public void setDate(String date) {
+        this.date = date;
     }
 
     /**
@@ -157,6 +177,29 @@ public class PerformanceData {
     public void setAdditionalComments(String additionalComments) {
         this.additionalComments = additionalComments;
     }
-    
-    
+
+
+    public double getTotalRating() {
+        return totalRating;
+    }
+
+    public void setTotalRating(int totalRating) {
+        this.totalRating = totalRating;
+    }
+
+    public String getReportId() {
+        return reportId;
+    }
+
+    public void setReportId(String reportId) {
+        this.reportId = reportId;
+    }
+
+    public int getCounter() {
+        return counter;
+    }
+
+    public void setCounter(int counter) {
+        this.counter = counter;
+    }
 }

@@ -101,7 +101,7 @@
       </Pane>
       <Pane layoutX="912.0" layoutY="32.0" prefHeight="369.0" prefWidth="399.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <TableView fx:id="tableView" editable="true" prefHeight="314.0" prefWidth="399.0">
+            <TableView fx:id="userTableView" editable="true" prefHeight="314.0" prefWidth="399.0">
                <columns>
                   <TableColumn fx:id="userIdHeader" editable="false" prefWidth="85.0" text="UserID" />
                   <TableColumn fx:id="userFirstNameHeader" editable="false" prefWidth="97.0" text="First Name" />
@@ -125,16 +125,17 @@
             <Font name="Stencil" size="40.0" />
          </font>
       </Label>
-      <ScrollPane layoutX="872.0" layoutY="413.0" prefHeight="355.0" prefWidth="399.0">
+      <ScrollPane layoutX="872.0" layoutY="413.0" prefHeight="355.0" prefWidth="399.0" AnchorPane.bottomAnchor="62.0" AnchorPane.rightAnchor="0.0">
          <content>
-            <TableView prefHeight="355.0" prefWidth="399.0">
+            <TableView fx:id="performanceDataTableView" prefHeight="355.0" prefWidth="399.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
+                <TableColumn fx:id="performanceDataDateHeader" prefWidth="125.0" text="Report Date" />
+                <TableColumn fx:id="performanceDataReportIDHeader" prefWidth="149.0" text="Report ID" />
+                  <TableColumn fx:id="performanceDataTotalRatingHeader" prefWidth="106.0" text="Total Rating" />
               </columns>
             </TableView>
          </content>
       </ScrollPane>
-      <Button fx:id="newReportButton" layoutX="901.0" layoutY="780.0" mnemonicParsing="false" onAction="#newReport" text="New Report" />
+      <Button fx:id="newReportButton" disable="true" layoutX="901.0" layoutY="780.0" mnemonicParsing="false" onAction="#newReport" text="New Report" AnchorPane.bottomAnchor="19.0" AnchorPane.rightAnchor="271.0" />
    </children>       
 </AnchorPane>

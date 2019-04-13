@@ -1,5 +1,7 @@
 package View;
 
+import Model.PerformanceData;
+import Model.PerformanceDataList;
 import Model.User;
 import Model.UserList;
 import javafx.collections.ListChangeListener;
@@ -8,9 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -22,9 +22,7 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.*;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -35,7 +33,11 @@ public class HomeController implements Initializable {
     private AnchorPane homeScreen;
 
     @FXML
+    private Button newReportButton;
+
+    @FXML
     private Label myProfileFirstName;
+
 
     @FXML
     private Label myProfileLastName;
@@ -59,7 +61,10 @@ public class HomeController implements Initializable {
     private Label userProfileRole;
 
     @FXML
-    private TableView<User> tableView;
+    private TableView<User> userTableView;
+
+    @FXML
+    private TableView<PerformanceData> performanceDataTableView;
 
     @FXML
     private TableColumn<User, String> userIdHeader;
@@ -73,9 +78,20 @@ public class HomeController implements Initializable {
     @FXML
     private TableColumn<User, String> userRoleHeader;
 
+    @FXML
+    private TableColumn<PerformanceData, String> performanceDataDateHeader;
+
+    @FXML
+    private TableColumn<PerformanceData, String> performanceDataReportIDHeader;
+
+    @FXML
+    private TableColumn<PerformanceData, Double> performanceDataTotalRatingHeader;
+
     private UserList userList;
+    private PerformanceDataList performanceDataList;
 
     private ObservableList<User> userObservableList;
+    private ObservableList<PerformanceData> performanceDataObservableList;
 
     /**
      * Constructor
@@ -99,7 +115,14 @@ public class HomeController implements Initializable {
         userLastNameHeader.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         userRoleHeader.setCellValueFactory(new PropertyValueFactory<>("role"));
         userObservableList = getUsersObservableList(userList.getUserList());
-        tableView.setItems(userObservableList);
+        userTableView.setItems(userObservableList);
+
+        //displayItems into PerformanceData Report Table
+        performanceDataList = new PerformanceDataList();
+        //performanceDataObservableList = FXCollections.observableArrayList();
+        performanceDataDateHeader.setCellValueFactory(new PropertyValueFactory<>("date"));
+        performanceDataReportIDHeader.setCellValueFactory(new PropertyValueFactory<>("reportId"));
+        performanceDataTotalRatingHeader.setCellValueFactory(new PropertyValueFactory<>("totalRating"));
     }
 
     /**
@@ -177,8 +200,8 @@ public class HomeController implements Initializable {
      * @param newUser
      */
     public void addUser(User newUser) {
-        tableView.getItems().add(newUser);
-        tableView.refresh();
+        userTableView.getItems().add(newUser);
+        userTableView.refresh();
     }
 
     /**
@@ -188,8 +211,8 @@ public class HomeController implements Initializable {
      * @param selectedUser
      */
     public void removeUser(User selectedUser) {
-        tableView.getItems().remove(selectedUser);
-        tableView.refresh();
+        userTableView.getItems().remove(selectedUser);
+        userTableView.refresh();
     }
 
     /**
@@ -197,7 +220,7 @@ public class HomeController implements Initializable {
      */
     public void RemoveUser() {
         
-        User removeUser = tableView.getSelectionModel().getSelectedItem();
+        User removeUser = userTableView.getSelectionModel().getSelectedItem();
         
         if (removeUser == null) {
             
@@ -218,10 +241,15 @@ public class HomeController implements Initializable {
         
                 userList.getUserList().remove(removeUser);
                 userList.writeUserListFile();
-                tableView.getItems().remove(removeUser);
+                userTableView.getItems().remove(removeUser);
             }
         }
 
+    }
+
+    public void addReportToTable(PerformanceData data) {
+        performanceDataTableView.getItems().add(data);
+        performanceDataTableView.refresh();
     }
 
     /**
@@ -233,29 +261,37 @@ public class HomeController implements Initializable {
 
         try {
             //get the User values of the selected user
-            String firstName = tableView.getSelectionModel().getSelectedItem().getFirstName();
-            String lastName = tableView.getSelectionModel().getSelectedItem().getLastName();
-            String userId = tableView.getSelectionModel().getSelectedItem().getUserId();
-            String role =  tableView.getSelectionModel().getSelectedItem().getRole();
+            String firstName = userTableView.getSelectionModel().getSelectedItem().getFirstName();
+            String lastName = userTableView.getSelectionModel().getSelectedItem().getLastName();
+            String userId = userTableView.getSelectionModel().getSelectedItem().getUserId();
+            String role =  userTableView.getSelectionModel().getSelectedItem().getRole();
 
             //populate the User Profile section
             userProfileFirstName.setText(firstName);
             userProfileLastName.setText(lastName);
             userProfileUserID.setText(userId);
             userProfileRole.setText(role);
+
+            //populate the Reports table with User Reports
+            performanceDataObservableList = getPerformanceDataObservableList(performanceDataList.getPerformanceDataByUserId(userId));
+            performanceDataTableView.setItems(performanceDataObservableList);
+
+            //enable the New Report button
+            newReportButton.setDisable(false);
         }
         catch (NullPointerException exception) {
             Alert alert = new Alert(AlertType.ERROR,
                         "No user has been selected, Please select a User on the table first before Selection",
                                     ButtonType.OK);
             alert.show();
+            exception.printStackTrace();
 
         }
     }
 
     /**
      * Helper method used to convert an ArrayList of Users into an
-     * ObservableList of Users to be displayed into the TableView
+     * ObservableList of Users to be displayed into the users TableView
       * @return ObservableList<User>
      */
     public ObservableList<User> getUsersObservableList(ArrayList<User> userList) {
@@ -264,6 +300,20 @@ public class HomeController implements Initializable {
             users.add(userList.get(i));
         }
         return users;
+    }
+
+    /**
+     * Helper method used to convert an ArrayList of PerformandeData reports into an
+     * ObservableList of PerformanceData to be displayed into the reports TableView
+     * @param data
+     * @return
+     */
+    public ObservableList<PerformanceData> getPerformanceDataObservableList(ArrayList<PerformanceData> data) {
+        ObservableList<PerformanceData> reportData = FXCollections.observableArrayList();
+        for (int i = 0; i < data.size(); i++) {
+            reportData.add(data.get(i));
+        }
+        return reportData;
     }
 
     /**
@@ -380,11 +430,11 @@ public class HomeController implements Initializable {
     }
 
     public TableView<User> getTableView() {
-        return tableView;
+        return userTableView;
     }
 
     public void setTableView(TableView<User> tableView) {
-        this.tableView = tableView;
+        this.userTableView = tableView;
     }
 
     public TableColumn<User, String> getUserIdHeader() {
