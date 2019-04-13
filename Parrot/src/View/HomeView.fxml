@@ -125,9 +125,9 @@
             <Font name="Stencil" size="40.0" />
          </font>
       </Label>
-      <ScrollPane layoutX="872.0" layoutY="413.0" prefHeight="346.0" prefWidth="399.0">
+      <ScrollPane layoutX="872.0" layoutY="413.0" prefHeight="355.0" prefWidth="399.0">
          <content>
-            <TableView prefHeight="329.0" prefWidth="399.0">
+            <TableView prefHeight="355.0" prefWidth="399.0">
               <columns>
                 <TableColumn prefWidth="75.0" text="C1" />
                 <TableColumn prefWidth="75.0" text="C2" />
