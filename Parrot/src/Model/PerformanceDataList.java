@@ -64,8 +64,9 @@ public class PerformanceDataList {
     
     public void createPlaceHolder(User user)
     {
-            ArrayList<PerformanceData> data = new ArrayList<>();
-            createUserPlaceHolder(user.userId, data);
+        ArrayList<PerformanceData> data = new ArrayList<>();
+        createUserPlaceHolder(user.userId, data);
+        writePerformanceDataListToFile();
     }
 
     /**
