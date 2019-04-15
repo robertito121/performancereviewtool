@@ -61,6 +61,12 @@ public class PerformanceDataList {
             createUserPlaceHolder(user.userId, data);
         }
     }
+    
+    public void createPlaceHolder(User user)
+    {
+            ArrayList<PerformanceData> data = new ArrayList<>();
+            createUserPlaceHolder(user.userId, data);
+    }
 
     /**
      * Creates a user placeholder in the Map for new PerformanceData to be inserted
