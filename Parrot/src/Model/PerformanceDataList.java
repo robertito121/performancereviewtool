@@ -145,4 +145,9 @@ public class PerformanceDataList {
     public void setFileName(String fileName) {
         this.fileName = fileName;
     }
+    
+    public void RemoveData(String userID) {
+        performanceDataMap.remove(userID);
+        writePerformanceDataListToFile();
+    }
 }
