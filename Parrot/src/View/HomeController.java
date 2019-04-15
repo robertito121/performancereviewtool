@@ -200,6 +200,7 @@ public class HomeController implements Initializable {
      * @param newUser
      */
     public void addUser(User newUser) {
+        performanceDataList.createPlaceHolder(newUser);
         userTableView.getItems().add(newUser);
         userTableView.refresh();
     }
