@@ -243,6 +243,7 @@ public class HomeController implements Initializable {
                 userList.getUserList().remove(removeUser);
                 userList.writeUserListFile();
                 userTableView.getItems().remove(removeUser);
+                performanceDataList.RemoveData(removeUser.getUserId());
             }
         }
 
