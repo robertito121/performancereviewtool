@@ -137,5 +137,6 @@
          </content>
       </ScrollPane>
       <Button fx:id="newReportButton" disable="true" layoutX="901.0" layoutY="780.0" mnemonicParsing="false" onAction="#newReport" text="New Report" AnchorPane.bottomAnchor="19.0" AnchorPane.rightAnchor="271.0" />
+      <Button fx:id="viewReportButton" layoutX="1117.0" layoutY="786.0" mnemonicParsing="false" onAction="#viewReport" text="View Report" AnchorPane.bottomAnchor="19.0" AnchorPane.rightAnchor="80.0" />
    </children>       
 </AnchorPane>

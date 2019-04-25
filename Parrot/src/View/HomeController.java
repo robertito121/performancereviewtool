@@ -34,6 +34,9 @@ public class HomeController implements Initializable {
 
     @FXML
     private Button newReportButton;
+    
+    @FXML
+    private Button viewReportButton;
 
     @FXML
     private Label myProfileFirstName;
@@ -361,6 +364,20 @@ public class HomeController implements Initializable {
         //pass Current Controller to addPerformanceData Controller to add items
         //into the current tableView
         addPerformanceDataController.setHomeController(this);
+    }
+    
+    public void viewReport() throws IOException {
+        
+        //set viewPerformanceDataView
+        FXMLLoader viewPerformanceDataViewLoader = new FXMLLoader(getClass().getResource("ViewPerformanceDataView.fxml"));
+        Parent viewPerformanceDataView = (Parent) viewPerformanceDataViewLoader.load();
+        Stage viewPerformanceDataViewStage = new Stage();
+        viewPerformanceDataViewStage.setTitle("View Report");
+        viewPerformanceDataViewStage.setScene(new Scene(viewPerformanceDataView));
+        viewPerformanceDataViewStage.show();
+        
+        ViewPerformanceDataController viewPerformanceDataController = viewPerformanceDataViewLoader.getController();
+        viewPerformanceDataController.setReport(userProfileFirstName.getText(), userProfileLastName.getText(), performanceDataTableView.getSelectionModel().getSelectedItem());
     }
 
     public AnchorPane getHomeScreen() {
