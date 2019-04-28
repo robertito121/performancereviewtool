@@ -80,6 +80,7 @@ public class AddUserController implements Initializable {
         //add items to combobox
         roles.getItems().addAll("Employee", "Manager", "Administrator");
         list = new UserList();
+        manageUsersController = new ManageUsersController();
     }
 
     /**
@@ -145,10 +146,16 @@ public class AddUserController implements Initializable {
         }
 
         //add User to database and TableViews
-        list.getUserList().add(newUser);
-        list.writeUserListFile();
-        homeController.addUser(newUser);
-        manageUsersController.addUser(newUser);
+        try {
+            list.getUserList().add(newUser);
+            list.writeUserListFile();
+            homeController.addUser(newUser);
+            manageUsersController.addUser(newUser);
+        }
+        catch (NullPointerException exception) {
+
+        }
+
 
     }
 

@@ -128,6 +128,8 @@ public class PerformanceDataList {
 
        ArrayList<PerformanceData> data = performanceDataMap.get(userId);
        PerformanceData.setInstanceCounter(data.size());
+
+
     }
 
     public Map<String, ArrayList<PerformanceData>> getPerformanceDataMap() {

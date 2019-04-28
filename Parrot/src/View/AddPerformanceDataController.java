@@ -101,6 +101,7 @@ public class AddPerformanceDataController implements Initializable {
         performanceDataList.addPerformanceDatatoHashMap(userID, performanceData);
         homeController.getPerformanceDataTableView().getItems().add(performanceData);
         homeController.getPerformanceDataTableView().refresh();
+        homeController.addReportToTable(performanceData);
 
         //close the Add performanceData Stage
         Stage stage = (Stage) nameLabel.getScene().getWindow();

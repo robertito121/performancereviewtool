@@ -79,6 +79,9 @@ public class LoginController implements Initializable {
             HomeController homeController = homeViewLoader.getController();
             homeController.populateMyProfilePane(firstName, lastName, userID, role);
 
+            //populate My Reports table with logged in user reports
+            homeController.populateMyReportsTable(userID);
+
             //dispose login View
             Stage loginStage = (Stage) loginButton.getScene().getWindow();
             loginStage.close();
