@@ -114,10 +114,10 @@
             <Button layoutX="144.0" layoutY="324.0" mnemonicParsing="false" onAction="#selectUser" prefHeight="31.0" prefWidth="98.0" text="Select User" />
          </children>
       </Pane>
-      <TableView fx:id="userPerformanceDataTableView" layoutX="300.0" layoutY="197.0" prefHeight="598.0" prefWidth="548.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="423.0" AnchorPane.topAnchor="197.0">
+      <TableView layoutX="300.0" layoutY="197.0" prefHeight="598.0" prefWidth="548.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="423.0" AnchorPane.topAnchor="197.0">
         <columns>
-          <TableColumn fx:id="userperformanceDataDateHeader" prefWidth="125.0" text="Report Date" />
-          <TableColumn fx:id="userperformanceDataReportIDHeader" prefWidth="149.0" text="Report ID" />
+          <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn prefWidth="75.0" text="C2" />
         </columns>
       </TableView>
       <Label layoutX="455.0" layoutY="100.0" prefHeight="49.0" prefWidth="323.0" text="My Reports" AnchorPane.leftAnchor="455.0" AnchorPane.rightAnchor="493.0">

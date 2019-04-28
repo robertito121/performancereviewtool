@@ -68,9 +68,6 @@ public class HomeController implements Initializable {
 
     @FXML
     private TableView<PerformanceData> performanceDataTableView;
-    
-    @FXML
-    private TableView<PerformanceData> userPerformanceDataTableView;
 
     @FXML
     private TableColumn<User, String> userIdHeader;
@@ -92,19 +89,12 @@ public class HomeController implements Initializable {
 
     @FXML
     private TableColumn<PerformanceData, Double> performanceDataTotalRatingHeader;
-    
-    @FXML
-    private TableColumn<PerformanceData, Double> userperformanceDataDateHeader;
-        
-    @FXML
-    private TableColumn<PerformanceData, Double> userperformanceDataReportIDHeader;    
 
     private UserList userList;
     private PerformanceDataList performanceDataList;
 
     private ObservableList<User> userObservableList;
     private ObservableList<PerformanceData> performanceDataObservableList;
-    private ObservableList<PerformanceData> userPerformanceDataObservableList;
 
     /**
      * Constructor
@@ -136,7 +126,6 @@ public class HomeController implements Initializable {
         performanceDataDateHeader.setCellValueFactory(new PropertyValueFactory<>("date"));
         performanceDataReportIDHeader.setCellValueFactory(new PropertyValueFactory<>("reportId"));
         performanceDataTotalRatingHeader.setCellValueFactory(new PropertyValueFactory<>("totalRating"));
-        
     }
 
     /**
@@ -152,12 +141,6 @@ public class HomeController implements Initializable {
         myProfileLastName.setText(lastName);
         myProfileUserID.setText(userID);
         myProfileRole.setText(role);
-        
-        performanceDataList = new PerformanceDataList();
-        userperformanceDataDateHeader.setCellValueFactory(new PropertyValueFactory<>("date"));
-        userperformanceDataReportIDHeader.setCellValueFactory(new PropertyValueFactory<>("reportId"));
-        userPerformanceDataObservableList = getPerformanceDataObservableList(performanceDataList.getPerformanceDataByUserId(userID));
-        userPerformanceDataTableView.setItems(userPerformanceDataObservableList);
     }
 
     /**
@@ -270,12 +253,8 @@ public class HomeController implements Initializable {
     }
 
     public void addReportToTable(PerformanceData data) {
-        //updating data to user performance data table
-        if(myProfileUserID.getText().equals(data.getUserID())){
-            userPerformanceDataObservableList.add(data);
-            userPerformanceDataTableView.setItems(userPerformanceDataObservableList);
-            userPerformanceDataTableView.refresh();
-        }
+        performanceDataTableView.getItems().add(data);
+        performanceDataTableView.refresh();
     }
 
     /**
@@ -591,13 +570,5 @@ public class HomeController implements Initializable {
 
     public void setPerformanceDataObservableList(ObservableList<PerformanceData> performanceDataObservableList) {
         this.performanceDataObservableList = performanceDataObservableList;
-    }
-
-    public ObservableList<PerformanceData> getUserPerformanceDataObservableList() {
-        return userPerformanceDataObservableList;
-    }
-
-    public void setUserPerformanceDataObservableList(ObservableList<PerformanceData> userPerformanceDataObservableList) {
-        this.userPerformanceDataObservableList = userPerformanceDataObservableList;
     }
 }
