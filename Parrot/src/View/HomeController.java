@@ -310,6 +310,7 @@ public class HomeController implements Initializable {
 
             //enable the New Report button
             newReportButton.setDisable(false);
+            viewReportButton.setDisable(false);
         }
         catch (NullPointerException exception) {
             Alert alert = new Alert(AlertType.ERROR,
