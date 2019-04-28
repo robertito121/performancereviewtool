@@ -30,7 +30,6 @@
                   <MenuItem mnemonicParsing="false" onAction="#showManageUsersView" text="User Management" />
                </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Reports" />
         </menus>
       </MenuBar>
       <Pane layoutY="32.0" prefHeight="286.0" prefWidth="268.0" style="-fx-border-color: black;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="32.0">
