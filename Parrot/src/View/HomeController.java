@@ -111,7 +111,6 @@ public class HomeController implements Initializable {
 
     private ObservableList<User> userObservableList;
     private ObservableList<PerformanceData> performanceDataObservableList;
-    private ObservableList<PerformanceData> userPerformanceDataObservableList;
 
     /**
      * Constructor
@@ -283,18 +282,7 @@ public class HomeController implements Initializable {
 
     }
 
-    public void addReportToTable(PerformanceData data) {
 
-        selectedUserPerformanceDataTableView.getItems().add(data);
-        selectedUserPerformanceDataTableView.refresh();
-
-        //updating data to user performance data table
-        if(myProfileUserID.getText().equals(data.getUserID())){
-            userPerformanceDataObservableList.add(data);
-
-        }
-
-    }
 
     /**
      * Populates the UserProfile Section with the selected user
@@ -611,11 +599,4 @@ public class HomeController implements Initializable {
         this.performanceDataObservableList = performanceDataObservableList;
     }
 
-    public ObservableList<PerformanceData> getUserPerformanceDataObservableList() {
-        return userPerformanceDataObservableList;
-    }
-
-    public void setUserPerformanceDataObservableList(ObservableList<PerformanceData> userPerformanceDataObservableList) {
-        this.userPerformanceDataObservableList = userPerformanceDataObservableList;
-    }
 }
