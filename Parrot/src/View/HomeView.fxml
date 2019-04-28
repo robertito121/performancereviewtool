@@ -117,16 +117,10 @@
 
       <TableView fx:id="loggedInUserPerformanceDataTableView" layoutX="300.0" layoutY="197.0" prefHeight="598.0" prefWidth="548.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="423.0" AnchorPane.topAnchor="197.0">
         <columns>
-          <TableColumn fx:id="loggedinUserPerformanceDataDateHeader" prefWidth="119.0" text="ReportDate" />
-          <TableColumn fx:id="loggedinUserPerformanceDataReportIDHeader" prefWidth="132.0" text="Report ID" />
-            <TableColumn fx:id="loggedinUserPerformanceDataTotalRatingHeader" prefWidth="132.0" text="Total Rating" />
-            <TableColumn fx:id="loggedinUserPerformanceDataCommentsHeader" maxWidth="1.7976931348623157E308" prefWidth="164.0" text="Comments " />
-
-      <TableView fx:id="userPerformanceDataTableView" layoutX="300.0" layoutY="197.0" prefHeight="598.0" prefWidth="548.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="423.0" AnchorPane.topAnchor="197.0">
-        <columns>
-          <TableColumn fx:id="userperformanceDataDateHeader" prefWidth="125.0" text="Report Date" />
-          <TableColumn fx:id="userperformanceDataReportIDHeader" prefWidth="149.0" text="Report ID" />
->>>>>>> b6f87581481f71a97a1f263e5112e8eafd9a44f3
+          <TableColumn fx:id="loggedinUserPerformanceDataDateHeader" prefWidth="125.0" text="Report Date" />
+          <TableColumn fx:id="loggedinUserPerformanceDataReportIDHeader" prefWidth="149.0" text="Report ID" />
+            <TableColumn fx:id="loggedinUserPerformanceDataTotalRatingHeader" prefWidth="135.0" text="Total Rating" />
+            <TableColumn fx:id="loggedinUserPerformanceDataCommentsHeader" prefWidth="163.0" text="Comments" />
         </columns>
       </TableView>
       <Label layoutX="455.0" layoutY="100.0" prefHeight="49.0" prefWidth="323.0" text="My Reports" AnchorPane.leftAnchor="455.0" AnchorPane.rightAnchor="493.0">
